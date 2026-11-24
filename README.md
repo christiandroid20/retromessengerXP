@@ -1,47 +1,64 @@
 # MSN-WhatsApp-XP
 
-**Cliente de mensajería de escritorio nativo en reconstrucción.** El objetivo es crear una aplicación propia inspirada en MSN Messenger, Windows Live Messenger, ICQ, Yahoo! Messenger y AIM, sin depender de la interfaz de WhatsApp Web.
+**Cliente de mensajería de escritorio nativo en reconstrucción.** La aplicación se está rehaciendo con C++20 y Qt 6 Widgets, sin Electron, Chromium ni WhatsApp Web embebido.
 
-## Estado real
-
-Esta rama inicia la sustitución del prototipo Electron por una base nativa Qt 6 + C++20.
+## Estado actual
 
 | Área | Estado |
 |---|---|
-| Aplicación nativa Qt Widgets | Esqueleto inicial |
-| Skin MSN Messenger 7.5 | Primera adaptación QSS; todavía no es réplica completa |
-| Skin ICQ 2000b | Primera adaptación QSS; todavía no es réplica completa |
-| Skins WLM 2009, Yahoo! y AIM | Conceptos pendientes de implementación |
-| Carga de skins QSS externos | Base inicial |
-| Lista real de contactos | Pendiente |
-| Conversaciones e historial | Pendiente |
-| Envío y recepción de mensajes | Pendiente |
-| Cuentas y sesiones múltiples | Pendiente |
-| Respuestas rápidas persistentes | Pendiente |
-| Adjuntos y visor multimedia | Pendiente |
-| Conectores de mensajería | Pendiente |
-| Instaladores multiplataforma | Pendiente |
+| Shell de escritorio Qt | Base inicial |
+| Skin MSN Messenger 7.5 | Adaptación QSS preliminar |
+| Skin ICQ 2000b | Adaptación QSS preliminar |
+| Avatar cuadrado estilo MSN 7.5 | Componente nativo reutilizable |
+| Foto de perfil por cuenta | Selección y guardado local en PNG |
+| Perfiles múltiples | Creación y separación local por UUID |
+| Carpeta persistente junto al ejecutable | Se usa si tiene permisos de escritura |
+| Fallback de almacenamiento | Directorio privado de datos del usuario |
+| Contactos, conversaciones e historial reales | Pendientes |
+| Inicio de sesión y sesiones autenticadas de WhatsApp | Pendientes |
+| Envío/recepción y adjuntos | Pendientes |
 
-**Esta versión no inicia sesión en WhatsApp ni en ningún otro servicio.** La ventana muestra deliberadamente estados vacíos y controles de envío deshabilitados: todavía no existe un núcleo de mensajería ni un transporte conectado.
+La aplicación todavía **no inicia sesión en WhatsApp**. Los perfiles locales no son sesiones autenticadas y la carpeta `session/` es una estructura preparada para el futuro conector; no contiene cookies ni tokens.
+
+## Fotos de usuario
+
+El avatar utiliza un formato cuadrado con marco azul, recorte de imagen y un marcador de iniciales cuando todavía no hay foto. En «Archivo → Cambiar foto de perfil…» se elige la imagen del perfil seleccionado. Cada cuenta conserva su propia foto en:
+
+```text
+data/accounts/<uuid>/profile/avatar.png
+```
+
+El componente queda listo para reutilizarse en las futuras filas de contactos. La lista real aún no está conectada al núcleo de mensajería.
+
+## Almacenamiento persistente y seguridad
+
+La app intenta guardar los datos en `data/` junto al ejecutable, tal como se solicitó. Si Windows, macOS o Linux no permite escribir en esa ubicación, usa el directorio privado de datos locales de la aplicación; no fuerza permisos ni requiere ejecutar como administrador.
+
+Estructura:
+
+```text
+data/
+  accounts.json
+  accounts/
+    <uuid>/
+      account.json
+      profile/avatar.png
+      session/
+      media/
+```
+
+Los perfiles se separan por UUID. El índice se actualiza de forma atómica. En Unix se aplican permisos de directorio limitados al usuario propietario; en Windows se heredan los permisos de la carpeta privada cuando se usa el fallback.
+
+No se guardan contraseñas, cookies ni tokens en archivos JSON. La persistencia real de una sesión de WhatsApp solo se podrá implementar cuando exista un transporte compatible y se integre el almacén seguro de credenciales del sistema operativo.
 
 ## Arquitectura objetivo
 
 - **Aplicación:** C++20 y Qt 6 Widgets.
-- **Interfaz:** ventanas y controles nativos, independientes de cualquier página web.
-- **Messenger Core:** modelo común de cuentas, contactos, conversaciones, mensajes y eventos (pendiente).
-- **Transportes:** adaptadores aislados por servicio, con un transporte simulado para desarrollo (pendiente).
-- **Skins:** componentes y recursos nativos; los archivos QSS externos se podrán cargar sin recompilar.
-- **Datos:** preferencias separadas de credenciales y sesiones; protección de secretos mediante mecanismos del sistema operativo.
-
-No se incorpora Qt WebEngine ni un navegador embebido. Tampoco se mantiene Electron, electron-vite, Node.js o Chromium como runtime de escritorio.
-
-## Skins y recursos
-
-La primera base nativa incluye MSN 7.5 e ICQ 2000b. Sus colores, bordes y jerarquías parten del prototipo anterior, pero aún necesitan comparación con referencias históricas y reconstrucción de todos sus componentes.
-
-Los archivos QSS externos se buscan en el directorio de datos de la aplicación, dentro de `skins/`. Los recursos gráficos propios existentes se conservan como referencia para su migración.
-
-Los WAV históricos de MSN e ICQ tienen titulares de derechos de terceros, según `resources/sounds/CREDITOS.md`. No se empaquetan en la aplicación nativa ni se asume permiso de redistribución. La web estática de presentación bajo `web/` es independiente del cliente de escritorio.
+- **Interfaz:** controles nativos y skins independientes del proveedor.
+- **Messenger Core:** cuentas, contactos, conversaciones, mensajes y eventos.
+- **Transportes:** adaptadores aislados por servicio, con un transporte simulado para desarrollo.
+- **Skins:** componentes, recursos y paquetes externos.
+- **Datos:** perfiles separados y secretos protegidos por el sistema operativo.
 
 ## Requisitos de desarrollo
 
@@ -49,19 +66,18 @@ Los WAV históricos de MSN e ICQ tienen titulares de derechos de terceros, segú
 - Qt 6.5 o posterior, módulo Widgets.
 - Compilador C++20.
 
-Cuando se autorice compilar, la configuración prevista será:
+Cuando se autorice compilar:
 
 ```sh
 cmake -S . -B build
 cmake --build build --config Release
 ```
 
-**No se ha ejecutado CMake, compilación, empaquetado ni pruebas de ejecución en esta migración.**
+**No se ha ejecutado CMake, compilación, empaquetado ni pruebas de ejecución en estos cambios.**
 
 ## Reglas del proyecto
 
 - La rama `main` no se modifica.
-- La migración nativa se trabaja en `work/msn-whatsapp-xp-native`.
 - No se hace force-push.
 - No se eliminan recursos históricos útiles sin conservar una referencia.
 - No se declara funcional una integración que no haya sido implementada y probada.
@@ -69,4 +85,4 @@ cmake --build build --config Release
 
 ## Licencia
 
-MIT para el código del proyecto, salvo los recursos que indiquen expresamente otra titularidad o licencia. La presencia de un recurso en el repositorio no implica que pueda redistribuirse.
+MIT para el código del proyecto, salvo los recursos que indiquen expresamente otra titularidad o licencia.
