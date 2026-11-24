@@ -69,3 +69,19 @@ Refactor incrementally:
 ## Current baseline note
 
 This document records the intended architecture and migration constraints. It does not claim that multi-window mode, five complete skins, multi-account support or media viewers are already implemented. Each capability must be delivered and tested in its own change.
+
+## Implementation status (2026-11-24)
+
+### Landed foundations
+- The visual chooser now presents all five target identities with paired miniature previews: contacts list and a sample conversation.
+- The shell's native skin menus route to the visual chooser rather than bypassing it with a text-only radio menu.
+- A typed native-window registry exists. The current contacts/home window is registered through it; stable conversation-key tracking is available as a foundation.
+- GitHub Actions runs `npm ci`, TypeScript checks and the Electron build on the work branch.
+
+### Not yet delivered
+- The registry is not yet creating conversation windows. The application still has one BrowserWindow and one WhatsApp WebContentsView.
+- Yahoo!, WLM 2009 and AIM are preview-only concepts, not selectable complete skins.
+- MSN and ICQ remain the only active skins. Their full-screen parity against the original applications has not yet been manually verified.
+- Multi-account partitions, independent/combined mode, custom palettes, and dedicated media/PDF viewers remain future implementation work.
+
+Do not describe a preview mockup as a finished skin, or the window registry as completed multi-window support.
