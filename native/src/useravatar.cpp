@@ -1,6 +1,10 @@
 #include "useravatar.h"
 
 #include <QPainter>
+#include <QLinearGradient>
+#include <QFont>
+#include <QColor>
+#include <QPen>
 #include <QPaintEvent>
 #include <QPainterPath>
 
