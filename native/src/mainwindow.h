@@ -23,10 +23,14 @@ private:
     void buildMenus();
     void applySelectedSkin(int index);
     void addAccount();
+    void refreshAccounts();
+    void changeProfilePhoto();
+    void selectAccount(int index);
 
     AppStorage m_storage;
     SkinManager *m_skinManager = nullptr;
     QComboBox *m_skinSelector = nullptr;
+    QComboBox *m_accountSelector = nullptr;
     QListWidget *m_contacts = nullptr;
     QLabel *m_contactEmptyState = nullptr;
     QLabel *m_conversationTitle = nullptr;
