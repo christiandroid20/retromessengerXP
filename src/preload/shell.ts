@@ -9,6 +9,8 @@ const on =
 
 const api: ShellApi = {
   getSettings: () => ipcRenderer.invoke('shell:settings'),
+  getConversationInfo: () => ipcRenderer.invoke('conversation:info'),
+  openConversation: (chatId, displayName) => ipcRenderer.send('conversation:open', { chatId, displayName }),
   setSettings: (patch) => ipcRenderer.send('shell:settings:set', patch),
   layout: (rect) => ipcRenderer.send('shell:layout', rect),
   windowControl: (action) => ipcRenderer.send('shell:window', action),
@@ -23,7 +25,8 @@ const api: ShellApi = {
   onShake: on('shake'),
   onMaximized: on('maximized'),
   onDialog: on('dialog'),
-  onSkinChooser: on('skin-chooser')
+  onSkinChooser: on('skin-chooser'),
+  onConversationSettings: on('conversation:settings')
 }
 
 contextBridge.exposeInMainWorld('messenger', api)
