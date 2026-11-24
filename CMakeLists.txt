@@ -15,6 +15,10 @@ qt_add_executable(msn-whatsapp-xp
     native/src/mainwindow.h
     native/src/skinmanager.cpp
     native/src/skinmanager.h
+    native/src/useravatar.cpp
+    native/src/useravatar.h
+    native/src/appstorage.cpp
+    native/src/appstorage.h
     native/resources/resources.qrc
 )
 
