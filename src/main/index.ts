@@ -423,7 +423,6 @@ function createConversationWindow(info: ConversationInfo): BrowserWindow {
     void shell.openExternal(url)
     return { action: 'deny' }
   })
-  windowManager.registerConversation(info.chatId, conversation)
   const page = join(__dirname, '../renderer/conversation.html')
   void conversation.loadFile(page)
   return conversation
