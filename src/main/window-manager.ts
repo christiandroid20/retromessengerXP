@@ -12,6 +12,15 @@ export class NativeWindowManager {
   private contacts?: BrowserWindow
   private readonly conversations = new Map<string, BrowserWindow>()
 
+  openContacts(create: () => BrowserWindow): BrowserWindow {
+    const current = this.getContacts()
+    if (current) {
+      this.focus(current)
+      return current
+    }
+    return this.registerContacts(create())
+  }
+
   registerContacts(window: BrowserWindow): BrowserWindow {
     this.contacts = window
     window.once('closed', () => {
@@ -23,6 +32,24 @@ export class NativeWindowManager {
   getContacts(): BrowserWindow | undefined {
     if (this.contacts?.isDestroyed()) this.contacts = undefined
     return this.contacts
+  }
+
+  openConversation(chatId: string, create: () => BrowserWindow): BrowserWindow {
+    const current = this.getConversation(chatId)
+    if (current) {
+      this.focus(current)
+      return current
+    }
+    return this.registerConversation(chatId, create())
+  }
+
+  getOpenConversationIds(): string[] {
+    const ids: string[] = []
+    for (const [key, window] of this.conversations) {
+      if (window.isDestroyed()) this.conversations.delete(key)
+      else ids.push(key.slice('conversation:'.length))
+    }
+    return ids
   }
 
   registerConversation(chatId: string, window: BrowserWindow): BrowserWindow {
