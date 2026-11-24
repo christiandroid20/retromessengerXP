@@ -1,0 +1,75 @@
+/* ICQ 2000b / Windows 98 inspired native skin. */
+QWidget {
+    background: #c0c0c0;
+    color: #000000;
+    font-family: "Microsoft Sans Serif", Tahoma, sans-serif;
+    font-size: 9pt;
+}
+QMainWindow, QMenuBar {
+    background: #c0c0c0;
+}
+QMenuBar {
+    border-bottom: 1px solid #808080;
+    padding: 2px;
+}
+QMenuBar::item {
+    padding: 3px 8px;
+}
+QMenuBar::item:selected {
+    background: #000080;
+    color: #ffffff;
+}
+#brandTitle, #conversationTitle {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 6px;
+    border: 1px solid #000040;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #000080, stop:1 #1084d0);
+}
+#contactsPanel, #conversationPanel {
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+#sectionHeading {
+    font-weight: bold;
+    padding: 5px;
+}
+#contactList, #messageHistory, #messageComposer {
+    background: #ffffff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    selection-background-color: #000080;
+    selection-color: #ffffff;
+}
+#emptyTitle {
+    color: #000080;
+    font-size: 13pt;
+    font-weight: bold;
+}
+#emptyState, #transportState {
+    color: #404040;
+    padding: 7px;
+}
+QPushButton, QComboBox {
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 4px 10px;
+}
+QPushButton:pressed {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+QPushButton:disabled {
+    color: #808080;
+}

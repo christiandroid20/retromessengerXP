@@ -1,0 +1,65 @@
+/* MSN Messenger 7.5 / Windows XP Luna inspired native skin. */
+QWidget {
+    background: #dbe8f8;
+    color: #172b4d;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+    font-size: 9pt;
+}
+QMainWindow, QMenuBar {
+    background: #dbe8f8;
+}
+QMenuBar {
+    border-bottom: 1px solid #9ab3dc;
+    padding: 3px;
+}
+QMenuBar::item {
+    padding: 4px 9px;
+    background: transparent;
+}
+QMenuBar::item:selected, QPushButton:hover {
+    background: #c4daf7;
+    border: 1px solid #7fa1d8;
+}
+#brandTitle, #conversationTitle {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px;
+    border: 1px solid #2b69c7;
+    border-radius: 5px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #48a5ff, stop:0.48 #0876e8, stop:1 #0645b5);
+}
+#contactsPanel, #conversationPanel {
+    background: #f8fbff;
+    border: 1px solid #8da9de;
+    border-radius: 4px;
+}
+#sectionHeading {
+    color: #174a91;
+    font-weight: bold;
+    padding: 5px;
+}
+#contactList, #messageHistory, #messageComposer {
+    background: #ffffff;
+    border: 1px solid #9ab3dc;
+    selection-background-color: #c9dcf6;
+}
+#emptyTitle {
+    color: #1d4f9e;
+    font-size: 15pt;
+    font-weight: bold;
+}
+#emptyState, #transportState {
+    color: #637795;
+    padding: 8px;
+}
+QPushButton, QComboBox {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #dce8fa);
+    border: 1px solid #7fa1d8;
+    border-radius: 3px;
+    padding: 5px 12px;
+}
+QPushButton:disabled {
+    color: #8996a8;
+    background: #e8edf5;
+}

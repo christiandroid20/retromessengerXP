@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/skins">
+    <file alias="msn-75.qss">../skins/msn-75.qss</file>
+    <file alias="icq-2000b.qss">../skins/icq-2000b.qss</file>
+  </qresource>
+</RCC>

@@ -1,7 +1,27 @@
-node_modules/
-out/
-dist/
+# CMake / native builds
+/build/
+/cmake-build-*/
+/out/
+/dist/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.user
+*.suo
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.app/
+
+# IDE
+.vscode/
+.idea/
+
+# Local application data
 *.log
-.netlify/
-output/
-.playwright-cli/
