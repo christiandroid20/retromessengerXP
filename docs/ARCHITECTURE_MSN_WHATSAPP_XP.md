@@ -80,11 +80,17 @@ El Skin Engine carga archivos QSS externos desde el directorio de datos de la ap
 - Renderer HTML/TypeScript del prototipo.
 - Workflows que ejecutaban builds de Electron.
 
+### Implementado después de la base inicial
+- Componente de avatar cuadrado con marco azul, recorte de foto e iniciales de respaldo, inspirado en MSN 7.5.
+- Selector de perfil local y cambio de foto por cuenta; las imágenes se guardan en `profile/avatar.png`.
+- Creación de varios perfiles locales por UUID, con índice JSON atómico y directorios independientes `profile/`, `session/` y `media/`.
+- Almacenamiento junto al ejecutable cuando la carpeta es escribible; fallback al directorio privado del usuario cuando no lo es.
+
 ### Todavía no existe
 - Messenger Core.
 - Transport Adapter API y Mock Transport.
 - Contactos reales, historial, envío/recepción y adjuntos.
-- Cuentas múltiples y almacenamiento de sesiones.
+- Inicio de sesión de WhatsApp y persistencia de sesiones autenticadas (pendientes).
 - Ventanas reales de chat y modo combinado.
 - Administrador de respuestas rápidas.
 - Skins completos de WLM 2009, Yahoo! y AIM.
@@ -105,3 +111,12 @@ El Skin Engine carga archivos QSS externos desde el directorio de datos de la ap
 - El modo simulado permite validar contactos, conversaciones y eventos.
 - La app distingue claramente simulación de integración real.
 - Las pruebas y empaquetados multiplataforma se incorporan después de validar el shell nativo.
+
+
+## Perfiles y persistencia local — 2026-11-24
+
+La aplicación crea perfiles locales independientes en `data/accounts/<uuid>/`. Cada perfil tiene `account.json`, `profile/avatar.png`, `session/` y `media/`. El índice `data/accounts.json` se escribe de forma atómica. Se intenta usar `data/` junto al ejecutable y, si no hay permisos de escritura, se recurre al almacenamiento privado del usuario. No se elevan privilegios ni se fuerzan ACL/permisos.
+
+El directorio `session/` es una reserva para el futuro adaptador: hoy no hay autenticación de WhatsApp, cookies, tokens ni restauración de sesiones. Los secretos deberán integrarse con el almacén seguro del sistema operativo y nunca escribirse en JSON. El avatar de perfil sí se guarda por cuenta y el componente visual se puede reutilizar en los futuros elementos de contacto.
+
+No se compiló ni ejecutó el proyecto para estos cambios.
