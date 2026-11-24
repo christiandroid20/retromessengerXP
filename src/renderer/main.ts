@@ -153,6 +153,7 @@ api.onMaximized((value) => {
   render()
 })
 api.onDialog(openDialog)
+api.onSkinChooser(openSkinChooser)
 
 void api.getSettings().then((s) => {
   settings = s
