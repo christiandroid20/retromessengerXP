@@ -13,7 +13,7 @@ import {
   WebContentsView,
   type MenuItemConstructorOptions
 } from 'electron'
-import type { MenuId, Rect, Settings, SkinId, SoundId, WaState } from '@shared/types'
+import type { ConversationInfo, MenuId, Rect, Settings, SkinId, SoundId, WaState } from '@shared/types'
 import { CHAT_FONTS, ICQ_STATUS_LABEL, MSN_STATUS_LABEL, type ChatFont, type IcqStatus, type MsnStatus } from '@shared/types'
 import { WINKS } from '@shared/winks'
 import winksCss from '@wa/css/winks.css?raw'
@@ -64,6 +64,10 @@ function updateSettings(patch: Partial<Settings>): void {
   applyZoom()
   sendShell('settings', next)
   sendWa('wa:settings', next)
+  for (const chatId of windowManager.getOpenConversationIds()) {
+    const conversation = windowManager.getConversation(chatId)
+    if (conversation && !conversation.webContents.isDestroyed()) conversation.webContents.send('conversation:settings', next)
+  }
   if (win) {
     win.setAlwaysOnTop(next.alwaysOnTop)
     win.setTitle(windowTitle(next.skin))
@@ -390,6 +394,50 @@ function popup(id: MenuId, x: number, y: number): void {
   Menu.buildFromTemplate(template).popup({ window: win, x: Math.round(x), y: Math.round(y) })
 }
 
+
+/* ----------------------------------------------------- conversation windows */
+
+/** Conversation windows are real top-level BrowserWindows, never child panels or
+ * relocated WebContentsViews. The transport integration will populate their timeline. */
+function createConversationWindow(info: ConversationInfo): BrowserWindow {
+  const s = settings()
+  const conversation = new BrowserWindow({
+    width: 760,
+    height: 620,
+    minWidth: 520,
+    minHeight: 420,
+    show: false,
+    frame: false,
+    title: `Conversación - ${info.displayName}`,
+    backgroundColor: BACKGROUND[s.skin],
+    webPreferences: {
+      preload: join(__dirname, '../preload/shell.js'),
+      sandbox: false,
+      contextIsolation: true
+    }
+  })
+  conversation.once('ready-to-show', () => conversation.show())
+  conversation.on('maximize', () => conversation.webContents.send('maximized', true))
+  conversation.on('unmaximize', () => conversation.webContents.send('maximized', false))
+  conversation.webContents.setWindowOpenHandler(({ url }) => {
+    void shell.openExternal(url)
+    return { action: 'deny' }
+  })
+  windowManager.registerConversation(info.chatId, conversation)
+  const page = join(__dirname, '../renderer/conversation.html')
+  void conversation.loadFile(page)
+  return conversation
+}
+
+function openConversation(info: ConversationInfo): void {
+  const existing = windowManager.openConversation(info.chatId, () => createConversationWindow(info))
+  if (!existing.isDestroyed()) {
+    existing.webContents.once('did-finish-load', () => existing.webContents.send('conversation:info', info))
+    if (existing.webContents.isLoading()) return
+    existing.webContents.send('conversation:info', info)
+  }
+}
+
 /* ------------------------------------------------------------------- tray */
 
 let trayImage: Electron.NativeImage | undefined
@@ -467,6 +515,23 @@ function createWindow(): void {
 
 function registerShellEvents(): void {
   ipcMain.handle('shell:settings', () => settings())
+  ipcMain.handle('conversation:info', (event) => {
+    const owner = BrowserWindow.fromWebContents(event.sender)
+    if (!owner) return null
+    for (const chatId of windowManager.getOpenConversationIds()) {
+      if (windowManager.getConversation(chatId) === owner) {
+        return { chatId, displayName: owner.getTitle().replace(/^Conversación - /, '') } satisfies ConversationInfo
+      }
+    }
+    return null
+  })
+  ipcMain.on('conversation:open', (event, raw: ConversationInfo) => {
+    if (event.sender !== win?.webContents || !raw || typeof raw !== 'object') return
+    const chatId = typeof raw.chatId === 'string' ? raw.chatId.trim().slice(0, 256) : ''
+    const displayName = typeof raw.displayName === 'string' ? raw.displayName.replace(/[\\r\\n]/g, ' ').trim().slice(0, 120) : ''
+    if (!chatId || !displayName) return
+    openConversation({ chatId, displayName })
+  })
   ipcMain.on('shell:settings:set', (_event, patch: Partial<Settings>) => updateSettings(patch))
   ipcMain.on('shell:layout', (_event, rect: Rect) => {
     contentRect = rect
