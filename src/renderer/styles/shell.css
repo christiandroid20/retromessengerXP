@@ -259,8 +259,8 @@ body[data-skin='off'] .hint {
 
 /* Paired mockups: each preview shows the contact list and an actual conversation layout. */
 .skin-preview { height: 226px; padding: 10px; overflow: hidden; display:flex; align-items:center; gap:7px; }
-.skin-preview > .pv-app { width:42%; min-width:0; overflow:hidden; border:1px solid rgba(40,55,75,.45); box-shadow:0 3px 9px rgba(0,0,0,.18); background:#fff; }
-.skin-preview > .pv-chat { width:58%; min-width:0; overflow:hidden; border:1px solid rgba(40,55,75,.45); box-shadow:0 3px 9px rgba(0,0,0,.18); background:#fff; }
+.skin-preview > .pv-app { flex: .82 1 0; width:auto; min-width:0; overflow:hidden; border:1px solid rgba(40,55,75,.45); box-shadow:0 3px 9px rgba(0,0,0,.18); background:#fff; }
+.skin-preview > .pv-chat { flex: 1.18 1 0; width:auto; min-width:0; overflow:hidden; border:1px solid rgba(40,55,75,.45); box-shadow:0 3px 9px rgba(0,0,0,.18); background:#fff; }
 .skin-preview .pv-title { height:20px; padding:0 4px; font-size:8px; gap:3px; border-radius:0; white-space:nowrap; overflow:hidden; }
 .skin-preview .pv-title i { margin-left:auto; font-style:normal; font-size:7px; }
 .skin-preview .pv-menu { padding:3px 4px; font-size:7px; white-space:nowrap; overflow:hidden; }
