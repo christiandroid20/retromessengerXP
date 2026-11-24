@@ -28,6 +28,7 @@ export function msnChrome(s: Settings, maximized: boolean): string {
       <button data-menu="actions">Acciones</button>
       <button data-menu="tools">Herramientas</button>
       <button data-menu="help">Ayuda</button>
+      <button data-menu="skin">Apariencia ▾</button>
     </nav>
     <main id="content"><div class="loading"><div class="spin">${msnLogo(72)}</div><p>Iniciando sesión...</p></div></main>
   </div>`
