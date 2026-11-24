@@ -276,13 +276,7 @@ function toast(kind: 'message' | 'online' | 'nudge', name: string, text: string)
 /* ------------------------------------------------------------------ menus */
 
 function skinItems(): MenuItemConstructorOptions[] {
-  const current = settings().skin
-  return [
-    { label: 'MSN Messenger 7.5', type: 'radio', checked: current === 'msn', click: () => updateSettings({ skin: 'msn' }) },
-    { label: 'ICQ 2000b', type: 'radio', checked: current === 'icq', click: () => updateSettings({ skin: 'icq' }) },
-    { label: 'WhatsApp original', type: 'radio', checked: current === 'off', click: () => updateSettings({ skin: 'off' }) }
-  ]
-}
+  return [{ label: 'Vista previa y elegir apariencia…', click: () => sendShell('skin-chooser') }]
 
 function toggleItems(spanish: boolean): MenuItemConstructorOptions[] {
   const s = settings()
