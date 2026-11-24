@@ -22,7 +22,7 @@ export default defineConfig({
     resolve: { alias },
     build: {
       rollupOptions: {
-        input: { index: resolve('src/renderer/index.html'), toast: resolve('src/renderer/toast.html') }
+        input: { index: resolve('src/renderer/index.html'), conversation: resolve('src/renderer/conversation.html'), toast: resolve('src/renderer/toast.html') }
       }
     }
   }
