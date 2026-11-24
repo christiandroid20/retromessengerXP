@@ -1,0 +1,39 @@
+#conversation-root { height:100%; }
+.conversation-window { height:100%; display:flex; flex-direction:column; color:#20364b; background:#edf3f9; }
+.conversation-titlebar { height:34px; flex:none; display:flex; align-items:center; gap:9px; padding:0 7px 0 11px; color:#fff; background:linear-gradient(180deg,#6ca8d8,#28639a); border-bottom:1px solid #174b78; -webkit-app-region:drag; }
+.conversation-titlebar strong { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; }
+.conversation-app-icon { font-size:16px; }
+.conversation-window-actions { display:flex; gap:3px; -webkit-app-region:no-drag; }
+.conversation-window-actions button { width:27px; height:23px; border:1px solid #a8c7df; border-radius:3px; color:#fff; background:linear-gradient(#8bbce0,#477eae); font:bold 15px Arial; }
+.conversation-window-actions .close { background:linear-gradient(#f39b91,#c43d35); border-color:#f4b4ae; }
+.conversation-toolbar { flex:none; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 15px; border-bottom:1px solid #c4d2df; background:linear-gradient(#fff,#e4edf5); }
+.conversation-person { display:flex; align-items:center; gap:10px; min-width:0; }
+.conversation-person > div:last-child { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.conversation-person b { font-size:13px; overflow:hidden; text-overflow:ellipsis; }
+.conversation-person small { color:#63778a; font-size:10px; }
+.conversation-avatar { width:38px; height:38px; display:grid; place-items:center; flex:none; border:1px solid #9db4c9; border-radius:4px; color:#fff; background:linear-gradient(145deg,#8db7d9,#477aa7); font:bold 14px Tahoma; }
+.conversation-actions,.compose-tools { display:flex; gap:5px; }
+.conversation-actions button,.compose-tools button { padding:5px 9px; border:1px solid #aabccc; border-radius:3px; color:#52687c; background:linear-gradient(#fff,#e5edf4); }
+.conversation-history { flex:1; min-height:0; overflow:auto; display:grid; place-items:center; padding:24px; background:#fff; }
+.conversation-empty { max-width:420px; text-align:center; color:#4b6074; }
+.empty-glyph { margin:auto; width:58px; height:58px; display:grid; place-items:center; border-radius:50%; color:#fff; background:linear-gradient(#9bc5e5,#4f86b4); font-size:27px; }
+.conversation-empty h2 { margin:15px 0 8px; font-size:16px; color:#2b4b68; }
+.conversation-empty p { margin:6px 0; line-height:1.5; }
+.conversation-empty .transport-note { margin-top:16px; padding:10px 12px; border:1px solid #d4e0eb; border-radius:4px; color:#61758a; background:#f3f7fb; font-size:10px; }
+.conversation-compose { flex:none; padding:8px 10px 10px; border-top:1px solid #c4d2df; background:#edf3f8; }
+.compose-tools { margin-bottom:7px; }
+.compose-row { display:flex; align-items:stretch; gap:8px; }
+.compose-row textarea { flex:1; min-height:68px; resize:vertical; padding:8px; border:1px solid #b5c4d2; border-radius:3px; color:#52687c; background:#f8fafc; font:11px Tahoma; }
+.compose-row .send { min-width:76px; border:1px solid #9ab4ca; border-radius:3px; color:#536a7e; background:linear-gradient(#fff,#dce8f2); }
+button:disabled,textarea:disabled { cursor:not-allowed; opacity:.72; }
+body[data-skin='icq'] .conversation-titlebar { background:linear-gradient(90deg,#000080,#1084d0); border-bottom:1px solid #000060; }
+body[data-skin='icq'] .conversation-window { background:#c0c0c0; color:#111; }
+body[data-skin='icq'] .conversation-toolbar,body[data-skin='icq'] .conversation-compose { background:#c0c0c0; }
+body[data-skin='icq'] .conversation-avatar { border-radius:0; background:linear-gradient(145deg,#27a9df,#0874a9); }
+body[data-skin='off'] .conversation-window { color:#e9edef; background:#111b21; }
+body[data-skin='off'] .conversation-titlebar { background:#202c33; border-color:#34434b; }
+body[data-skin='off'] .conversation-toolbar,body[data-skin='off'] .conversation-compose { background:#202c33; border-color:#34434b; }
+body[data-skin='off'] .conversation-history { background:#0b141a; }
+body[data-skin='off'] .conversation-empty,body[data-skin='off'] .conversation-empty h2 { color:#d8e2e8; }
+body[data-skin='off'] .transport-note { color:#aab8c0; background:#18252d; border-color:#34434b; }
+body[data-skin='off'] .conversation-person small { color:#aab8c0; }
