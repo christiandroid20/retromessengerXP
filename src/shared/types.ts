@@ -55,6 +55,8 @@ export interface ToastData {
 
 export interface ShellApi {
   getSettings(): Promise<Settings>
+  getConversationInfo(): Promise<ConversationInfo | null>
+  openConversation(chatId: string, displayName: string): void
   setSettings(patch: Partial<Settings>): void
   layout(rect: Rect): void
   windowControl(action: 'minimize' | 'maximize' | 'close'): void
@@ -70,6 +72,7 @@ export interface ShellApi {
   onMaximized(cb: (maximized: boolean) => void): void
   onDialog(cb: (dialog: 'options' | 'about') => void): void
   onSkinChooser(cb: () => void): void
+  onConversationSettings(cb: (settings: Settings) => void): void
 }
 
 export const MSN_STATUS_LABEL: Record<MsnStatus, string> = {
@@ -93,3 +96,10 @@ export const ICQ_STATUS_LABEL: Record<IcqStatus, string> = {
 }
 
 export const NUDGE_TEXT = 'ZUMBIDO'
+
+
+/** Identity and presentation data for an independently hosted conversation window. */
+export interface ConversationInfo {
+  chatId: string
+  displayName: string
+}
