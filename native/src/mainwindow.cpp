@@ -1,19 +1,25 @@
 #include "mainwindow.h"
 #include "skinmanager.h"
+#include "useravatar.h"
 
 #include <QAction>
 #include <QComboBox>
+#include <QDesktopServices>
+#include <QFileInfo>
 #include <QFrame>
 #include <QHBoxLayout>
+#include <QInputDialog>
 #include <QLabel>
 #include <QListWidget>
 #include <QMenu>
 #include <QMenuBar>
+#include <QMessageBox>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QSettings>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QUrl>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -67,6 +73,22 @@ void MainWindow::buildInterface()
     contactsPanel->setMinimumWidth(220);
     auto *contactsLayout = new QVBoxLayout(contactsPanel);
     contactsLayout->setContentsMargins(8, 8, 8, 8);
+
+    auto *profileRow = new QHBoxLayout;
+    m_profileAvatar = new UserAvatar(48, contactsPanel);
+    m_profileAvatar->setInitials(QStringLiteral("ME"));
+    profileRow->addWidget(m_profileAvatar, 0, Qt::AlignTop);
+    auto *profileText = new QVBoxLayout;
+    auto *profileName = new QLabel(QStringLiteral("Mi perfil"), contactsPanel);
+    profileName->setObjectName(QStringLiteral("profileName"));
+    auto *profileHint = new QLabel(QStringLiteral("Foto de usuario · MSN 7.5"), contactsPanel);
+    profileHint->setObjectName(QStringLiteral("profileHint"));
+    profileText->addWidget(profileName);
+    profileText->addWidget(profileHint);
+    profileText->addStretch();
+    profileRow->addLayout(profileText, 1);
+    contactsLayout->addLayout(profileRow);
+
     auto *contactsHeading = new QLabel(QStringLiteral("Contactos"), contactsPanel);
     contactsHeading->setObjectName(QStringLiteral("sectionHeading"));
     contactsLayout->addWidget(contactsHeading);
@@ -75,7 +97,7 @@ void MainWindow::buildInterface()
     m_contacts->setObjectName(QStringLiteral("contactList"));
     m_contacts->setAccessibleName(QStringLiteral("Lista de contactos"));
     m_contactEmptyState = new QLabel(
-        QStringLiteral("Los contactos aparecerán cuando conectemos un transporte de mensajería."),
+        QStringLiteral("Los contactos aparecerán aquí con su foto de usuario, nombre y estado."),
         contactsPanel);
     m_contactEmptyState->setWordWrap(true);
     m_contactEmptyState->setObjectName(QStringLiteral("emptyState"));
@@ -87,9 +109,14 @@ void MainWindow::buildInterface()
     auto *conversationLayout = new QVBoxLayout(conversationPanel);
     conversationLayout->setContentsMargins(12, 12, 12, 12);
 
+    auto *conversationHeader = new QHBoxLayout;
+    auto *conversationAvatar = new UserAvatar(40, conversationPanel);
+    conversationAvatar->setInitials(QStringLiteral("?"));
+    conversationHeader->addWidget(conversationAvatar);
     m_conversationTitle = new QLabel(QStringLiteral("Conversación"), conversationPanel);
     m_conversationTitle->setObjectName(QStringLiteral("conversationTitle"));
-    conversationLayout->addWidget(m_conversationTitle);
+    conversationHeader->addWidget(m_conversationTitle, 1);
+    conversationLayout->addLayout(conversationHeader);
 
     auto *history = new QWidget(conversationPanel);
     history->setObjectName(QStringLiteral("messageHistory"));
@@ -135,6 +162,14 @@ void MainWindow::buildInterface()
     splitter->setStretchFactor(1, 3);
     outer->addWidget(splitter, 1);
 
+    m_storageState = new QLabel(
+        QStringLiteral("%1 · %2 cuenta(s) guardada(s)")
+            .arg(m_storage.storageDescription())
+            .arg(m_storage.accounts().size()),
+        central);
+    m_storageState->setObjectName(QStringLiteral("storageState"));
+    outer->addWidget(m_storageState);
+
     setCentralWidget(central);
     statusBar()->showMessage(QStringLiteral("Interfaz nativa · Sin transporte conectado"));
 }
@@ -142,6 +177,15 @@ void MainWindow::buildInterface()
 void MainWindow::buildMenus()
 {
     auto *fileMenu = menuBar()->addMenu(QStringLiteral("&Archivo"));
+    auto *addAccountAction = fileMenu->addAction(QStringLiteral("Agregar cuenta..."));
+    connect(addAccountAction, &QAction::triggered, this, &MainWindow::addAccount);
+
+    auto *openDataAction = fileMenu->addAction(QStringLiteral("Abrir carpeta de datos"));
+    connect(openDataAction, &QAction::triggered, this, [this] {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(m_storage.dataRoot()));
+    });
+
+    fileMenu->addSeparator();
     auto *quitAction = fileMenu->addAction(QStringLiteral("Salir"));
     connect(quitAction, &QAction::triggered, this, &QWidget::close);
 
@@ -162,9 +206,35 @@ void MainWindow::buildMenus()
     auto *aboutAction = helpMenu->addAction(QStringLiteral("Acerca de MSN-WhatsApp-XP"));
     connect(aboutAction, &QAction::triggered, this, [this] {
         statusBar()->showMessage(
-            QStringLiteral("Versión nativa en reconstrucción. Aún no hay cuentas ni transporte conectados."),
+            QStringLiteral("Base nativa en desarrollo. Las cuentas se registran localmente; el inicio de sesión y transporte aún no existen."),
             8000);
     });
+}
+
+void MainWindow::addAccount()
+{
+    bool accepted = false;
+    const QString name = QInputDialog::getText(
+        this, QStringLiteral("Agregar cuenta"),
+        QStringLiteral("Nombre para identificar esta cuenta de WhatsApp:"),
+        QLineEdit::Normal, {}, &accepted);
+    if (!accepted)
+        return;
+
+    StoredAccount account;
+    QString error;
+    if (!m_storage.addAccount(name, &account, &error)) {
+        QMessageBox::warning(this, QStringLiteral("No se pudo guardar la cuenta"), error);
+        return;
+    }
+
+    m_storageState->setText(
+        QStringLiteral("%1 · %2 cuenta(s) guardada(s)")
+            .arg(m_storage.storageDescription())
+            .arg(m_storage.accounts().size()));
+    statusBar()->showMessage(
+        QStringLiteral("Perfil local «%1» creado. El inicio de sesión de WhatsApp aún no está integrado.")
+            .arg(account.displayName), 8000);
 }
 
 void MainWindow::applySelectedSkin(int index)
