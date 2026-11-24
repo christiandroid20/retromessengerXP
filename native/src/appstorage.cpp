@@ -1,19 +1,18 @@
 #include "appstorage.h"
 
 #include <QCoreApplication>
+#include <QDateTime>
 #include <QDir>
 #include <QFile>
 #include <QFileDevice>
+#include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QSaveFile>
 #include <QStandardPaths>
+#include <QStringList>
 #include <QUuid>
-
-#ifdef Q_OS_UNIX
-#include <sys/stat.h>
-#endif
 
 namespace {
 bool ensurePrivateDirectory(const QString &path)
