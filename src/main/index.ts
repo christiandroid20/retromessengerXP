@@ -232,6 +232,13 @@ function registerSidebarEvents(): void {
   ipcMain.on('wa:open-options', (event) => {
     if (event.sender === wa?.webContents) sendShell('dialog', 'options')
   })
+  ipcMain.on('wa:open-conversation', (event, raw: ConversationInfo) => {
+    if (event.sender !== wa?.webContents || !raw || typeof raw !== 'object') return
+    const chatId = typeof raw.chatId === 'string' ? raw.chatId.trim().slice(0, 256) : ''
+    const displayName = typeof raw.displayName === 'string' ? raw.displayName.replace(/[\\r\\n]/g, ' ').trim().slice(0, 120) : ''
+    if (!chatId || !displayName) return
+    openConversation({ chatId, displayName })
+  })
 }
 
 function registerWaEvents(): void {
@@ -540,11 +547,12 @@ function registerShellEvents(): void {
     waVisible = visible
     placeView()
   })
-  ipcMain.on('shell:window', (_event, action: 'minimize' | 'maximize' | 'close') => {
-    if (!win) return
-    if (action === 'minimize') win.minimize()
-    else if (action === 'maximize') (win.isMaximized() ? win.unmaximize() : win.maximize())
-    else win.close()
+  ipcMain.on('shell:window', (event, action: 'minimize' | 'maximize' | 'close') => {
+    const owner = BrowserWindow.fromWebContents(event.sender)
+    if (!owner || !['minimize', 'maximize', 'close'].includes(action)) return
+    if (action === 'minimize') owner.minimize()
+    else if (action === 'maximize') (owner.isMaximized() ? owner.unmaximize() : owner.maximize())
+    else owner.close()
   })
   ipcMain.on('shell:menu', (_event, { menu, x, y }: { menu: MenuId; x: number; y: number }) => popup(menu, x, y))
   ipcMain.on('shell:icon', (_event, dataUrl: string) => {
