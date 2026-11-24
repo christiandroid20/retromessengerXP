@@ -6,6 +6,12 @@
 #include <QComboBox>
 #include <QDesktopServices>
 #include <QFileInfo>
+#include <QFileDialog>
+#include <QFile>
+#include <QImageReader>
+#include <QLineEdit>
+#include <QPixmap>
+#include <QDir>
 #include <QFrame>
 #include <QHBoxLayout>
 #include <QInputDialog>
@@ -83,7 +89,11 @@ void MainWindow::buildInterface()
     profileName->setObjectName(QStringLiteral("profileName"));
     auto *profileHint = new QLabel(QStringLiteral("Foto de usuario · MSN 7.5"), contactsPanel);
     profileHint->setObjectName(QStringLiteral("profileHint"));
+    m_accountSelector = new QComboBox(contactsPanel);
+    m_accountSelector->setObjectName(QStringLiteral("accountSelector"));
+    m_accountSelector->setMinimumWidth(130);
     profileText->addWidget(profileName);
+    profileText->addWidget(m_accountSelector);
     profileText->addWidget(profileHint);
     profileText->addStretch();
     profileRow->addLayout(profileText, 1);
@@ -180,6 +190,9 @@ void MainWindow::buildMenus()
     auto *addAccountAction = fileMenu->addAction(QStringLiteral("Agregar cuenta..."));
     connect(addAccountAction, &QAction::triggered, this, &MainWindow::addAccount);
 
+    auto *changePhotoAction = fileMenu->addAction(QStringLiteral("Cambiar foto de perfil..."));
+    connect(changePhotoAction, &QAction::triggered, this, &MainWindow::changeProfilePhoto);
+
     auto *openDataAction = fileMenu->addAction(QStringLiteral("Abrir carpeta de datos"));
     connect(openDataAction, &QAction::triggered, this, [this] {
         QDesktopServices::openUrl(QUrl::fromLocalFile(m_storage.dataRoot()));
@@ -228,6 +241,7 @@ void MainWindow::addAccount()
         return;
     }
 
+    refreshAccounts();
     m_storageState->setText(
         QStringLiteral("%1 · %2 cuenta(s) guardada(s)")
             .arg(m_storage.storageDescription())
@@ -248,4 +262,78 @@ void MainWindow::applySelectedSkin(int index)
 
     QSettings settings;
     settings.setValue(QStringLiteral("appearance/skin"), skinId);
+}
+
+void MainWindow::refreshAccounts()
+{
+    const QString currentId = m_accountSelector->currentData().toString();
+    const QVector<StoredAccount> accounts = m_storage.accounts();
+    m_accountSelector->blockSignals(true);
+    m_accountSelector->clear();
+    for (const StoredAccount &account : accounts)
+        m_accountSelector->addItem(account.displayName, account.id);
+    int index = m_accountSelector->findData(currentId);
+    if (index < 0 && m_accountSelector->count() > 0)
+        index = 0;
+    m_accountSelector->setCurrentIndex(index);
+    m_accountSelector->blockSignals(false);
+    selectAccount(index);
+}
+
+void MainWindow::selectAccount(int index)
+{
+    if (index < 0 || index >= m_accountSelector->count()) {
+        m_profileAvatar->setPhoto({});
+        m_profileAvatar->setInitials(QStringLiteral("ME"));
+        return;
+    }
+
+    const QString accountId = m_accountSelector->itemData(index).toString();
+    for (const StoredAccount &account : m_storage.accounts()) {
+        if (account.id != accountId)
+            continue;
+        const QString avatarPath = QDir(account.directory).filePath(QStringLiteral("profile/avatar.png"));
+        m_profileAvatar->setPhoto(avatarPath);
+        if (!QFileInfo::exists(avatarPath))
+            m_profileAvatar->setInitials(account.displayName.left(2));
+        return;
+    }
+}
+
+void MainWindow::changeProfilePhoto()
+{
+    const int index = m_accountSelector->currentIndex();
+    if (index < 0) {
+        QMessageBox::information(this, QStringLiteral("Foto de perfil"),
+                                 QStringLiteral("Primero agrega una cuenta local."));
+        return;
+    }
+
+    const QString source = QFileDialog::getOpenFileName(
+        this, QStringLiteral("Elegir foto de perfil"), {},
+        QStringLiteral("Imágenes (*.png *.jpg *.jpeg *.bmp *.webp)"));
+    if (source.isEmpty())
+        return;
+
+    QImageReader reader(source);
+    const QImage image = reader.read();
+    if (image.isNull()) {
+        QMessageBox::warning(this, QStringLiteral("Foto no válida"), reader.errorString());
+        return;
+    }
+
+    const QString accountId = m_accountSelector->currentData().toString();
+    for (const StoredAccount &account : m_storage.accounts()) {
+        if (account.id != accountId)
+            continue;
+        const QString destination = QDir(account.directory).filePath(QStringLiteral("profile/avatar.png"));
+        if (!QDir().mkpath(QFileInfo(destination).absolutePath()) || !image.save(destination, "PNG")) {
+            QMessageBox::warning(this, QStringLiteral("No se pudo guardar"),
+                                 QStringLiteral("No fue posible guardar la foto en el perfil de esta cuenta."));
+            return;
+        }
+        m_profileAvatar->setPhoto(destination);
+        statusBar()->showMessage(QStringLiteral("Foto de perfil guardada para «%1».").arg(account.displayName), 6000);
+        return;
+    }
 }
