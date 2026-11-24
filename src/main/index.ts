@@ -24,6 +24,7 @@ import icqCss from '@wa/css/icq.css?raw'
 import { iconCssVars } from '@shared/icons'
 import { ensureSoundsDir, soundsDir, store } from './store'
 import { showToast } from './toast'
+import { NativeWindowManager } from './window-manager'
 
 const WHATSAPP_URL = 'https://web.whatsapp.com/'
 /** WhatsApp only serves browsers it knows, so the view introduces itself as plain Chrome on this OS. */
@@ -40,6 +41,7 @@ const bundledSoundsDir = (): string =>
 /** App icon for the tray until the shell sends its skin-specific one (Linux hides empty trays). */
 const appIcon = (): string => (app.isPackaged ? join(process.resourcesPath, 'icon.png') : join(app.getAppPath(), 'build', 'icon.png'))
 
+const windowManager = new NativeWindowManager()
 let win: BrowserWindow | undefined
 let wa: WebContentsView | undefined
 let tray: Tray | undefined
@@ -440,6 +442,7 @@ function createWindow(): void {
       autoplayPolicy: 'no-user-gesture-required'
     }
   })
+  windowManager.registerContacts(win)
   if (maximized) win.maximize()
   win.once('ready-to-show', () => win?.show())
   win.on('maximize', () => sendShell('maximized', true))
