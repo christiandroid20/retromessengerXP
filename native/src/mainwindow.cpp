@@ -283,7 +283,7 @@ void MainWindow::refreshAccounts()
 void MainWindow::selectAccount(int index)
 {
     if (index < 0 || index >= m_accountSelector->count()) {
-        m_profileAvatar->setPhoto({});
+        m_profileAvatar->setPhoto(QString());
         m_profileAvatar->setInitials(QStringLiteral("ME"));
         return;
     }
