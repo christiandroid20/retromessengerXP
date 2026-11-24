@@ -132,10 +132,21 @@ function createWhatsAppView(window: BrowserWindow): WebContentsView {
     }
   })
 
-  // Notifications and microphone/camera keep working like in Chrome.
+  // Keep the app's themed notifications as the single notification surface.
+  // Allow the permissions WhatsApp needs, but deny web notifications so the OS
+  // does not display a second, generic toast alongside our custom Messenger toast.
+  const allowedPermissions = new Set([
+    'media',
+    'clipboard-sanitized-write',
+    'clipboard-read',
+    'fullscreen'
+  ])
+  const isAllowedPermission = (permission: string): boolean => allowedPermissions.has(permission)
+
   contents.session.setPermissionRequestHandler((_wc, permission, callback) => {
-    callback(['notifications', 'media', 'clipboard-sanitized-write', 'clipboard-read', 'fullscreen'].includes(permission))
+    callback(isAllowedPermission(permission))
   })
+  contents.session.setPermissionCheckHandler((_wc, permission) => isAllowedPermission(permission))
 
   window.contentView.addChildView(view)
   void contents.loadURL(WHATSAPP_URL)
