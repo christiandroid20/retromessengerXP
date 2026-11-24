@@ -22,7 +22,8 @@ const api: ShellApi = {
   onPlay: on('play'),
   onShake: on('shake'),
   onMaximized: on('maximized'),
-  onDialog: on('dialog')
+  onDialog: on('dialog'),
+  onSkinChooser: on('skin-chooser')
 }
 
 contextBridge.exposeInMainWorld('messenger', api)
