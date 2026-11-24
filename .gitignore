@@ -25,3 +25,6 @@ Makefile
 
 # Local application data
 *.log
+
+# Runtime profiles, account metadata and local sessions
+/data/
