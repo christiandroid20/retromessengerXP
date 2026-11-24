@@ -3,7 +3,7 @@ import './styles/msn.css'
 import './styles/icq.css'
 import type { Settings, WaState } from '@shared/types'
 import { icqFlower, msnBuddy, svgUrl } from '@shared/icons'
-import { aboutDialog, icqChrome, msnChrome, offChrome, optionsDialog } from './skins'
+import { aboutDialog, icqChrome, msnChrome, offChrome, optionsDialog, skinChooserDialog } from './skins'
 import { clearSoundCache, playSound } from './sounds'
 
 const api = window.messenger
@@ -64,9 +64,11 @@ root.addEventListener('click', (event) => {
   if (win) return api.windowControl(win.dataset.win as 'minimize' | 'maximize' | 'close')
   const menu = target.closest<HTMLElement>('[data-menu]')
   if (menu) {
+    if (menu.dataset.menu === 'skin') return openSkinChooser()
     const r = menu.getBoundingClientRect()
     return api.openMenu(menu.dataset.menu as never, r.left, r.bottom)
   }
+
 })
 
 root.addEventListener('dblclick', (event) => {
@@ -76,6 +78,25 @@ root.addEventListener('dblclick', (event) => {
 })
 
 /* ---------------------------------------------------------------- dialogs */
+
+function openSkinChooser(): void {
+  modal.innerHTML = skinChooserDialog(settings)
+  modal.hidden = false
+  api.setWaVisible(false)
+  const close = (): void => {
+    modal.hidden = true
+    modal.innerHTML = ''
+    api.setWaVisible(true)
+  }
+  modal.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', close))
+  modal.querySelectorAll<HTMLButtonElement>('[data-apply-skin]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const skin = button.dataset.applySkin
+      if (skin === 'msn' || skin === 'icq') api.setSettings({ skin })
+      close()
+    })
+  })
+}
 
 function openDialog(kind: 'options' | 'about'): void {
   modal.innerHTML = kind === 'options' ? optionsDialog(settings) : aboutDialog(settings)
