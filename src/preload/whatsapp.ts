@@ -584,6 +584,24 @@ function markLogin(): void {
   if (box) setData(box, 'wmRole', 'login-card')
 }
 
+
+/** Double-clicking a contact opens its own top-level conversation window.
+ * Only use WhatsApp's stable row data-id; display names are never used as identity. */
+function registerDetachedConversationGesture(): void {
+  document.addEventListener('dblclick', (event) => {
+    const target = event.target
+    if (!(target instanceof Element)) return
+    const row = target.closest<HTMLElement>(SEL.listRows)
+    if (!row) return
+    const chatId = row.getAttribute('data-id')?.trim()
+    const displayName = row.querySelector(SEL.listTitle)?.getAttribute('title')?.trim()
+    if (!chatId || !displayName) return
+    event.preventDefault()
+    event.stopPropagation()
+    ipcRenderer.send('wa:open-conversation', { chatId, displayName })
+  }, true)
+}
+
 /* -------------------------------------------------------------------- loop */
 
 function detectState(): WaState {
@@ -626,6 +644,7 @@ const schedule = (): void => {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+  registerDetachedConversationGesture()
   layoutObserver = new ResizeObserver(schedule)
   ipcRenderer.send('wa:hello')
   tick()
