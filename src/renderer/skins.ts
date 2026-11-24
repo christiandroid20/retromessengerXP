@@ -97,3 +97,30 @@ export function aboutDialog(s: Settings): string {
     </div>
   </div>`
 }
+
+
+/* Visual skin gallery: each card is a miniature, representative window preview. */
+export function skinChooserDialog(s: Settings): string {
+  const choices = [
+    { id: 'msn', name: 'MSN Messenger 7.5', era: 'Windows XP · Luna', state: 'Disponible', description: 'Azul Luna, barra brillante y controles redondeados.', sample: '<div class="pv-title"><b>●</b> MSN Messenger <i>— □ ×</i></div><div class="pv-menu">Archivo　Contactos　Acciones　Herramientas</div><div class="pv-profile"><span class="pv-avatar">☺</span><span><b>Christy</b><small>Disponible · Escuchando música</small></span></div><div class="pv-list"><b>▼ Contactos (3)</b><p>🟢 Anita</p><p>🟢 Alex</p><p>🌙 Sam</p></div><div class="pv-footer">Buscar contactos　　＋ Agregar</div>' },
+    { id: 'wlm', name: 'Windows Live Messenger 2009', era: 'Windows Vista / 7 · Aero', state: 'En desarrollo', description: 'Cristal translúcido, reflejos y composición Aero.', sample: '<div class="pv-title"><b>✿</b> Windows Live Messenger <i>— □ ×</i></div><div class="pv-profile aero"><span class="pv-avatar">☺</span><span><b>Christy</b><small>Disponible · Compartiendo música</small></span></div><div class="pv-list aero"><b>Favoritos</b><p>🟢 Anita</p><p>🟢 Alex</p><p>🌙 Sam</p></div><div class="pv-footer aero">Correo　　Fotos　　Compartir</div>' },
+    { id: 'yahoo', name: 'Yahoo! Messenger clásico', era: 'Windows 98 / XP', state: 'En desarrollo', description: 'Morado Yahoo, lista compacta y botones clásicos.', sample: '<div class="pv-title yahoo"><b>Y!</b> Yahoo! Messenger <i>— □ ×</i></div><div class="pv-menu">Messenger　Contactos　Ayuda</div><div class="pv-profile yahoo"><span class="pv-avatar">☺</span><span><b>Christy</b><small>Disponible</small></span></div><div class="pv-list"><b>▼ Amigos</b><p>🟢 Anita</p><p>🟢 Alex</p><p>🌙 Sam</p></div><div class="pv-footer yahoo">Añadir　　Enviar mensaje</div>' },
+    { id: 'icq', name: 'ICQ 2000b', era: 'Windows 98 / 2000', state: 'Disponible', description: 'Gris clásico, biseles 3D y flor ICQ.', sample: '<div class="pv-title icq"><b>✿</b> ICQ - Contact List <i>— □ ×</i></div><div class="pv-menu icq">Main　Services　Help</div><div class="pv-profile icq"><span class="pv-avatar">✿</span><span><b>Christy</b><small>Online · ICQ# 123456789</small></span></div><div class="pv-list icq"><b>▼ Online</b><p>🟢 Anita</p><p>🟢 Alex</p><p>🌙 Sam</p></div><div class="pv-footer icq">Add Users　　Find</div>' },
+    { id: 'aim', name: 'AIM clásico', era: 'Windows 98 / XP', state: 'En desarrollo', description: 'Azul AOL, iconografía Buddy y paneles sencillos.', sample: '<div class="pv-title aim"><b>●</b> AOL Instant Messenger <i>— □ ×</i></div><div class="pv-menu">People　My AIM　Help</div><div class="pv-profile aim"><span class="pv-avatar">☺</span><span><b>Christy</b><small>Available</small></span></div><div class="pv-list"><b>▼ Buddies</b><p>🟢 Anita</p><p>🟢 Alex</p><p>🌙 Sam</p></div><div class="pv-footer aim">Get Buddy Info　　IM</div>' }
+  ]
+  return `
+  <section class="skin-gallery" aria-label="Selector de apariencia">
+    <header class="skin-gallery-head"><div><h2>Elige tu mensajero</h2><p>Vista previa de cada interfaz antes de aplicarla.</p></div><button type="button" data-close aria-label="Cerrar">×</button></header>
+    <div class="skin-gallery-grid">${choices.map((item) => `
+      <article class="skin-card ${item.id === s.skin ? 'selected' : ''}" data-preview-skin="${item.id}">
+        <div class="skin-preview pv-${item.id}">${item.sample}</div>
+        <div class="skin-card-copy"><div class="skin-card-title"><b>${item.name}</b><span>${item.era}</span></div>
+          <p>${item.description}</p>
+          <div class="skin-card-actions"><small>${item.state}${item.id === s.skin ? ' · Actual' : ''}</small>
+          ${item.id === 'msn' || item.id === 'icq' ? `<button type="button" data-apply-skin="${item.id}">${item.id === s.skin ? 'Aplicado' : 'Aplicar'}</button>` : '<button type="button" disabled title="Esta apariencia aún está en desarrollo">Próximamente</button>'}
+          </div>
+        </div>
+      </article>`).join('')}</div>
+    <footer class="skin-gallery-foot">Las vistas marcadas «En desarrollo» son conceptos visuales; todavía no cambian la interfaz activa.</footer>
+  </section>`
+}
