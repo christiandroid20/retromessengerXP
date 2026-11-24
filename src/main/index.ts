@@ -277,6 +277,7 @@ function toast(kind: 'message' | 'online' | 'nudge', name: string, text: string)
 
 function skinItems(): MenuItemConstructorOptions[] {
   return [{ label: 'Vista previa y elegir apariencia…', click: () => sendShell('skin-chooser') }]
+}
 
 function toggleItems(spanish: boolean): MenuItemConstructorOptions[] {
   const s = settings()
