@@ -69,6 +69,7 @@ export interface ShellApi {
   onShake(cb: () => void): void
   onMaximized(cb: (maximized: boolean) => void): void
   onDialog(cb: (dialog: 'options' | 'about') => void): void
+  onSkinChooser(cb: () => void): void
 }
 
 export const MSN_STATUS_LABEL: Record<MsnStatus, string> = {
