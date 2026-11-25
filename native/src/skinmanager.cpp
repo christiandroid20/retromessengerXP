@@ -19,7 +19,13 @@ void SkinManager::reload()
         {QStringLiteral("msn-75"), QStringLiteral("MSN Messenger 7.5 · Windows XP Luna"),
          QStringLiteral(":/skins/msn-75.qss"), {}},
         {QStringLiteral("icq-2000b"), QStringLiteral("ICQ 2000b · Windows 98"),
-         QStringLiteral(":/skins/icq-2000b.qss"), {}}
+         QStringLiteral(":/skins/icq-2000b.qss"), {}},
+        {QStringLiteral("yahoo-messenger-9"), QStringLiteral("Yahoo! Messenger 9"),
+         QStringLiteral(":/skins/yahoo-messenger-9.qss"), {}},
+        {QStringLiteral("wlm-2009"), QStringLiteral("Windows Live Messenger 2009"),
+         QStringLiteral(":/skins/wlm-2009.qss"), {}},
+        {QStringLiteral("aim-7"), QStringLiteral("AIM 7"),
+         QStringLiteral(":/skins/aim-7.qss"), {}}
     };
 
     const QString customRoot = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
