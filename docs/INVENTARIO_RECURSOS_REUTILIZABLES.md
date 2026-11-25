@@ -27,7 +27,7 @@ Rama de trabajo: `work/msn-whatsapp-xp`
 | Skin WLM 2009 | `native/skins/wlm-2009.qss` | QSS preliminar; réplica completa pendiente. |
 | Skin AIM Classic | `native/skins/aim-classic.qss` | QSS preliminar; réplica completa pendiente. |
 | Skin AIM 7 | `native/skins/aim-7.qss` | QSS preliminar; réplica completa pendiente. |
-| Iconos originales | `native/resources/icons/*.svg` | SVG propios para Yahoo!, WLM 2009 y AIM; no son logotipos oficiales. |
+| Iconos vectoriales propios | `native/resources/icons/*.svg` | SVG de MSN 7.5, ICQ 2000b, Yahoo!, WLM 2009 y AIM; dibujos propios, no logotipos oficiales ni recursos extraídos. |
 
 ## Referencias y licencias
 
