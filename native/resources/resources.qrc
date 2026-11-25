@@ -5,6 +5,7 @@
     <file alias="yahoo-messenger-9.qss">../skins/yahoo-messenger-9.qss</file>
     <file alias="wlm-2009.qss">../skins/wlm-2009.qss</file>
     <file alias="aim-7.qss">../skins/aim-7.qss</file>
+    <file alias="aim-classic.qss">../skins/aim-classic.qss</file>
   </qresource>
   <qresource prefix="/icons">
     <file alias="yahoo-messenger.svg">icons/yahoo-messenger.svg</file>
