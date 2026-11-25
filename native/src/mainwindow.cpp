@@ -95,8 +95,16 @@ void MainWindow::buildInterface()
     m_skinSelector->setObjectName(QStringLiteral("skinSelector"));
     for (const auto &skin : m_skinManager->availableSkins())
         m_skinSelector->addItem(iconForSkin(skin.id), skin.displayName, skin.id);
-    top->addWidget(new QLabel(QStringLiteral("Tema:"), central));
+    auto *themeLabel = new QLabel(QStringLiteral("Tema:"), central);
+    top->addWidget(themeLabel);
     top->addWidget(m_skinSelector);
+    const bool classicWindow = m_currentSkinId == QStringLiteral("msn-75")
+        || m_currentSkinId == QStringLiteral("icq-2000b");
+    if (classicWindow) {
+        appLabel->hide();
+        themeLabel->hide();
+        m_skinSelector->hide();
+    }
     outer->addLayout(top);
 
     m_storageState = new QLabel(central);
@@ -167,7 +175,7 @@ void MainWindow::rebuildSkinWorkspace()
         m_accountSelector->setObjectName(QStringLiteral("accountSelector"));
         m_accountSelector->setMinimumWidth(125);
         identity->addWidget(m_accountSelector);
-        auto *presence = heading(QStringLiteral("● Conectado"), profilePanel,
+        auto *presence = heading(QStringLiteral("● Sin conexión"), profilePanel,
                                  QStringLiteral("msnPresence"));
         identity->addWidget(presence);
         identity->addWidget(heading(QStringLiteral("<Escribe un mensaje personal>"),
@@ -211,7 +219,7 @@ void MainWindow::rebuildSkinWorkspace()
         m_conversationTitle = heading(QStringLiteral("Conversación"),
                                       conversationHeader, QStringLiteral("msnConversationTitle"));
         headerLayout->addWidget(m_conversationTitle, 1);
-        headerLayout->addWidget(heading(QStringLiteral("En línea"),
+        headerLayout->addWidget(heading(QStringLiteral("Desconectado"),
                                         conversationHeader, QStringLiteral("msnConversationPresence")));
         conversationLayout->addWidget(conversationHeader);
 
@@ -226,6 +234,9 @@ void MainWindow::rebuildSkinWorkspace()
         historyLayout->addWidget(empty);
         historyLayout->addStretch();
         conversationLayout->addWidget(history, 1);
+        m_transportState = heading(QStringLiteral("Sin conexión · Messenger Core pendiente"),
+                                   conversationPanel, QStringLiteral("msnTransportState"));
+        conversationLayout->addWidget(m_transportState);
 
         auto *toolbar = new QHBoxLayout;
         toolbar->addWidget(disabledTool(QStringLiteral("Fuente"), conversationPanel, QStringLiteral("msnToolButton")));
@@ -266,7 +277,7 @@ void MainWindow::rebuildSkinWorkspace()
         m_accountSelector->setMinimumWidth(100);
         identityTop->addWidget(m_accountSelector, 1);
         identityLayout->addLayout(identityTop);
-        auto *uin = heading(QStringLiteral("ICQ#: —"), identityPanel, QStringLiteral("icqUin"));
+        auto *uin = heading(QStringLiteral("ICQ#: pendiente"), identityPanel, QStringLiteral("icqUin"));
         identityLayout->addWidget(uin);
         contactsLayout->addWidget(identityPanel);
 
@@ -295,7 +306,7 @@ void MainWindow::rebuildSkinWorkspace()
         quickTools->addStretch();
         contactArea->addLayout(quickTools);
         contactsLayout->addLayout(contactArea, 1);
-        auto *statusLine = heading(QStringLiteral("● Online"),
+        auto *statusLine = heading(QStringLiteral("● Offline"),
                                    contactsPanel, QStringLiteral("icqStatusLine"));
         contactsLayout->addWidget(statusLine);
 
@@ -420,6 +431,18 @@ void MainWindow::buildMenus()
         auto *changePhotoAction = menu->addAction(QStringLiteral("Cambiar foto de perfil..."));
         connect(changePhotoAction, &QAction::triggered, this, &MainWindow::changeProfilePhoto);
     };
+    auto addSkinChoices = [this](QMenu *menu) {
+        for (const auto &skin : m_skinManager->availableSkins()) {
+            auto *choice = menu->addAction(skin.displayName);
+            choice->setCheckable(true);
+            choice->setChecked(skin.id == m_currentSkinId);
+            connect(choice, &QAction::triggered, this, [this, id = skin.id] {
+                const int index = m_skinSelector->findData(id);
+                if (index >= 0)
+                    m_skinSelector->setCurrentIndex(index);
+            });
+        }
+    };
     auto addAppearanceAction = [this](QMenu *menu) {
         auto *reload = menu->addAction(QStringLiteral("Actualizar temas externos"));
         connect(reload, &QAction::triggered, this, [this] {
@@ -444,6 +467,9 @@ void MainWindow::buildMenus()
             QDesktopServices::openUrl(QUrl::fromLocalFile(m_storage.dataRoot()));
         });
         mainMenu->addSeparator();
+        auto *skinChoices = mainMenu->addMenu(QStringLiteral("Change Skin"));
+        addSkinChoices(skinChoices);
+        mainMenu->addSeparator();
         auto *quit = mainMenu->addAction(QStringLiteral("Exit"));
         connect(quit, &QAction::triggered, this, &QWidget::close);
 
@@ -451,6 +477,8 @@ void MainWindow::buildMenus()
         services->addAction(QStringLiteral("Contact List"))->setEnabled(false);
         services->addAction(QStringLiteral("Find Users..."))->setEnabled(false);
         auto *skin = menuBar()->addMenu(QStringLiteral("Change &Skin"));
+        addSkinChoices(skin);
+        skin->addSeparator();
         addAppearanceAction(skin);
         auto *help = menuBar()->addMenu(QStringLiteral("&Help"));
         help->addAction(QStringLiteral("About ICQ 2000b"))->setEnabled(false);
@@ -470,6 +498,9 @@ void MainWindow::buildMenus()
         auto *actionsMenu = menuBar()->addMenu(QStringLiteral("&Acciones"));
         actionsMenu->addAction(QStringLiteral("Enviar un mensaje instantáneo"))->setEnabled(false);
         auto *toolsMenu = menuBar()->addMenu(QStringLiteral("&Herramientas"));
+        auto *skinChoices = toolsMenu->addMenu(QStringLiteral("Skin"));
+        addSkinChoices(skinChoices);
+        toolsMenu->addSeparator();
         addAppearanceAction(toolsMenu);
         auto *helpMenu = menuBar()->addMenu(QStringLiteral("A&yuda"));
         helpMenu->addAction(QStringLiteral("Acerca de MSN-WhatsApp-XP"))->setEnabled(false);
