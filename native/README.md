@@ -10,7 +10,7 @@ Este directorio contiene la aplicación de escritorio Qt 6, sin Electron ni nave
 
 ## Configuración local
 
-No se ejecutó ninguna compilación al preparar estos cambios.
+No se ejecutó ninguna compilación al preparar esta etapa.
 
 Cuando se autorice una compilación:
 
@@ -18,6 +18,19 @@ Cuando se autorice una compilación:
 cmake -S . -B build
 cmake --build build --config Release
 ```
+
+## Skins históricos
+
+El selector registra seis estilos:
+
+- AIM Classic
+- AIM 7
+- Windows Live Messenger 2009
+- Yahoo! Messenger 9
+- MSN Messenger 7.5
+- ICQ 2000b
+
+Los QSS existentes son adaptaciones preliminares. Actualmente se aplican sobre una estructura genérica compartida; no son reproducciones 1:1. La reconstrucción fiel requiere ventanas, composición, controles, métricas, recursos y estados particulares para cada cliente. Los objetivos de versión, referencias y criterios de aceptación se documentan en [SKIN_1TO1_IMPLEMENTATION_PLAN.md](../docs/SKIN_1TO1_IMPLEMENTATION_PLAN.md).
 
 ## Fotos de usuario
 
@@ -48,13 +61,13 @@ Cada cuenta tiene un UUID y sus propios directorios. El índice se escribe media
 
 **Límite actual:** se guardan los perfiles locales y la estructura preparada para cada sesión, pero todavía no hay inicio de sesión de WhatsApp ni transporte que escriba/restaure cookies, tokens o estado autenticado. No se guardan contraseñas ni secretos en JSON. La integración futura deberá usar el almacén seguro del sistema operativo para credenciales.
 
-## Estado
+## Estado funcional
 
 - Shell nativo Qt Widgets.
-- Skin QSS preliminar MSN 7.5, ICQ 2000b, Yahoo! Messenger 9, Windows Live Messenger 2009, AIM Classic y AIM 7.\n- Iconos SVG originales para los selectores de Yahoo!, WLM 2009 y AIM (compartido por AIM Classic y AIM 7).
+- Seis hojas QSS preliminares registradas.
+- Iconos SVG propios para Yahoo!, WLM 2009 y AIM; el icono AIM se comparte entre AIM Classic y AIM 7.
 - Avatar cuadrado reutilizable y foto de perfil persistente por perfil local.
 - Creación y separación de múltiples perfiles locales.
 - Directorio de datos junto a la instalación cuando es escribible; fallback privado por usuario.
 - Contactos reales, historial, envío, adjuntos y transporte: pendientes.
 - Persistencia de sesiones autenticadas de WhatsApp: pendiente de un conector y de un diseño seguro de credenciales.
-- Los skins Yahoo!, WLM 2009, AIM Classic y AIM 7 están registrados en el selector; son primeras adaptaciones visuales, no reproducciones 1:1.
