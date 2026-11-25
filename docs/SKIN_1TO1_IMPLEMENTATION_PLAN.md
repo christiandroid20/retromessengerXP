@@ -95,3 +95,15 @@ Un tema no se considera 1:1 hasta cumplir todo lo siguiente:
 - No incorporar ejecutables, DLL o paquetes de recursos propietarios sin autorización/licencia verificable.
 - No afirmar que existe fidelidad 1:1 antes de superar los criterios de aceptación.
 - No usar la interfaz original de WhatsApp como séptimo tema ni como base visual.
+
+
+## Actualización de implementación — 2026-11-25
+
+Se realizó una primera portabilidad estructural de MSN 7.5 e ICQ 2000b desde la referencia MIT Retro Messenger a widgets Qt:
+
+- `MainWindow::rebuildSkinWorkspace()` crea dos jerarquías de widgets diferentes para MSN e ICQ.
+- `MainWindow::buildMenus()` cambia los menús según el skin y permite cambiar de tema desde los menús históricos.
+- `native/skins/msn-75.qss` y `native/skins/icq-2000b.qss` contienen reglas para los nuevos controles.
+- Los controles que dependen del núcleo de mensajería continúan deshabilitados; los estados se muestran como desconectados para no simular una sesión real.
+
+Esto corrige la limitación anterior de aplicar solo un recoloreo a una estructura genérica para esos dos temas. **No demuestra fidelidad 1:1**: la barra de título nativa del sistema sigue presente, faltan diálogos y estados completos, no se han hecho capturas comparativas y no se ha ejecutado Qt. Los otros cuatro skins no se modificaron.
