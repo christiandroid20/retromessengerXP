@@ -2,14 +2,17 @@
 
 #include "appstorage.h"
 #include <QMainWindow>
+#include <QString>
 
 class QComboBox;
 class QLabel;
+class QVBoxLayout;
 class QListWidget;
 class QPlainTextEdit;
 class QPushButton;
 class SkinManager;
 class UserAvatar;
+class QWidget;
 
 class MainWindow final : public QMainWindow
 {
@@ -20,6 +23,7 @@ public:
 
 private:
     void buildInterface();
+    void rebuildSkinWorkspace();
     void buildMenus();
     void applySelectedSkin(int index);
     void addAccount();
@@ -39,4 +43,7 @@ private:
     UserAvatar *m_profileAvatar = nullptr;
     QPlainTextEdit *m_composer = nullptr;
     QPushButton *m_sendButton = nullptr;
+    QWidget *m_workspace = nullptr;
+    QVBoxLayout *m_outerLayout = nullptr;
+    QString m_currentSkinId = QStringLiteral("msn-75");
 };
