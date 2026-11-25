@@ -22,7 +22,7 @@ Rama de migración: work/msn-whatsapp-xp-native
 | Ventana principal | native/src/mainwindow.* | Shell inicial sin datos reales. |
 | Gestor de skins | native/src/skinmanager.* | Selector y carga de QSS externo. |
 | Skin MSN 7.5 | native/skins/msn-75.qss | Primera adaptación, no réplica completa. |
-| Skin ICQ 2000b | native/skins/icq-2000b.qss | Primera adaptación, no réplica completa. |\n| Skin Yahoo! Messenger 9 | native/skins/yahoo-messenger-9.qss | QSS propio; paleta púrpura. |\n| Skin WLM 2009 | native/skins/wlm-2009.qss | QSS propio; azul cristal Wave 3. |\n| Skin AIM 7 | native/skins/aim-7.qss | QSS propio; gris/amarillo/AOL azul. |\n| Iconos originales | native/resources/icons/*.svg | SVG propios para Yahoo!, WLM 2009 y AIM. |
+| Skin ICQ 2000b | native/skins/icq-2000b.qss | Primera adaptación, no réplica completa. |\n| Skin Yahoo! Messenger 9 | native/skins/yahoo-messenger-9.qss | QSS propio; paleta púrpura. |\n| Skin WLM 2009 | native/skins/wlm-2009.qss | QSS propio; azul cristal Wave 3. |\n| Skin AIM Classic | native/skins/aim-classic.qss | QSS propio; Buddy List clásica gris/azul. |\n| Skin AIM 7 | native/skins/aim-7.qss | QSS propio; gris/amarillo/AOL azul. |\n| Iconos originales | native/resources/icons/*.svg | SVG propios para Yahoo!, WLM 2009 y AIM. |
 
 ## Referencias de estilo y licencias\n\nLa procedencia y los límites de redistribución están documentados en `docs/SKIN_REFERENCES_AND_ASSET_LICENSES.md`. Se consultaron referencias históricas de Yahoo! Messenger 9, WLM 2009 y AIM 7. No se copiaron recursos extraídos de instaladores ni paquetes comunitarios sin licencia de redistribución clara.\n\n## Fuera del runtime
 
@@ -37,7 +37,7 @@ Rama de migración: work/msn-whatsapp-xp-native
 |---|---|
 | Shell nativo | Esqueleto inicial |
 | MSN 7.5 / ICQ 2000b | QSS preliminar |
-| Yahoo! Messenger 9 / WLM 2009 / AIM 7 | QSS y SVG propios integrados; fidelidad visual y componentes completos pendientes |
+| Yahoo! Messenger 9 / WLM 2009 / AIM Classic / AIM 7 | QSS propios integrados; fidelidad visual y componentes completos pendientes |
 | Contactos e historial | Pendiente |
 | Envío y recepción | Pendiente |
 | Transportes y modo simulado | Pendiente |
