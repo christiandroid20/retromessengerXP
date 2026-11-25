@@ -15,6 +15,7 @@
 #include <QFrame>
 #include <QHBoxLayout>
 #include <QInputDialog>
+#include <QIcon>
 #include <QLabel>
 #include <QListWidget>
 #include <QMenu>
@@ -28,6 +29,16 @@
 #include <QUrl>
 #include <QVBoxLayout>
 #include <QWidget>
+
+namespace {
+QIcon iconForSkin(const QString &id)
+{
+    if (id == QStringLiteral("yahoo-messenger-9")) return QIcon(QStringLiteral(":/icons/yahoo-messenger.svg"));
+    if (id == QStringLiteral("wlm-2009")) return QIcon(QStringLiteral(":/icons/wlm-2009.svg"));
+    if (id == QStringLiteral("aim-7")) return QIcon(QStringLiteral(":/icons/aim-7.svg"));
+    return {};
+}
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -66,7 +77,7 @@ void MainWindow::buildInterface()
     m_skinSelector = new QComboBox(central);
     m_skinSelector->setObjectName(QStringLiteral("skinSelector"));
     for (const auto &skin : m_skinManager->availableSkins())
-        m_skinSelector->addItem(skin.displayName, skin.id);
+        m_skinSelector->addItem(iconForSkin(skin.id), skin.displayName, skin.id);
     top->addWidget(new QLabel(QStringLiteral("Apariencia:"), central));
     top->addWidget(m_skinSelector);
     outer->addLayout(top);
@@ -209,7 +220,7 @@ void MainWindow::buildMenus()
         m_skinManager->reload();
         m_skinSelector->clear();
         for (const auto &skin : m_skinManager->availableSkins())
-            m_skinSelector->addItem(skin.displayName, skin.id);
+            m_skinSelector->addItem(iconForSkin(skin.id), skin.displayName, skin.id);
         const int index = m_skinSelector->findData(current);
         m_skinSelector->setCurrentIndex(index >= 0 ? index : 0);
         applySelectedSkin(m_skinSelector->currentIndex());
@@ -259,6 +270,10 @@ void MainWindow::applySelectedSkin(int index)
     const QString skinId = m_skinSelector->itemData(index).toString();
     if (!m_skinManager->apply(skinId, qApp))
         return;
+
+    const QIcon skinIcon = iconForSkin(skinId);
+    if (!skinIcon.isNull())
+        setWindowIcon(skinIcon);
 
     QSettings settings;
     settings.setValue(QStringLiteral("appearance/skin"), skinId);
