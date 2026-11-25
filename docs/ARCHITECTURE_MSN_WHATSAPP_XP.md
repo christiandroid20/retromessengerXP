@@ -8,9 +8,9 @@ Clientes objetivo:
 
 1. MSN Messenger 7.5 — Windows XP Luna.
 2. Windows Live Messenger 2009 — Windows Vista/7 Aero.
-3. Yahoo! Messenger clásico — versión por definir.
+3. Yahoo! Messenger 9 — paleta púrpura y vistas de contactos.
 4. ICQ 2000b — Windows 98/2000.
-5. AIM clásico — versión por definir.
+5. AIM 7 — Buddy List y lenguaje visual gris/amarillo.
 
 Ninguna página web de terceros controla la interfaz. WhatsApp Web deja de ser el shell y no se incluye un navegador embebido.
 
@@ -47,7 +47,7 @@ Un skin completo debe definir sus propios componentes, recursos, estados e inter
 - Notificaciones, sonidos y animaciones.
 - Visores multimedia y preferencias.
 
-La primera base Qt incluye dos estilos QSS iniciales: MSN 7.5 e ICQ 2000b. Son adaptaciones preliminares, no reconstrucciones 1:1. WLM 2009, Yahoo! y AIM continúan como objetivos de diseño.
+La base Qt incluye cinco estilos QSS: MSN 7.5, ICQ 2000b, Yahoo! Messenger 9, WLM 2009 y AIM 7. Todos son adaptaciones preliminares, no reconstrucciones 1:1. Los tres skins nuevos incluyen iconos SVG originales en el selector. Las referencias y límites de redistribución se registran en `docs/SKIN_REFERENCES_AND_ASSET_LICENSES.md`.. WLM 2009, Yahoo! y AIM continúan como objetivos de diseño.
 
 El Skin Engine carga archivos QSS externos desde el directorio de datos de la aplicación, para que los temas añadidos por el usuario no requieran recompilar el ejecutable. La evolución a paquetes de skin con manifiesto, imágenes, iconos, cursores, fuentes y sonidos queda pendiente.
 
