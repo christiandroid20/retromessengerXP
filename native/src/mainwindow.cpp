@@ -33,6 +33,8 @@
 namespace {
 QIcon iconForSkin(const QString &id)
 {
+    if (id == QStringLiteral("msn-75")) return QIcon(QStringLiteral(":/icons/msn-75.svg"));
+    if (id == QStringLiteral("icq-2000b")) return QIcon(QStringLiteral(":/icons/icq-2000b.svg"));
     if (id == QStringLiteral("yahoo-messenger-9")) return QIcon(QStringLiteral(":/icons/yahoo-messenger.svg"));
     if (id == QStringLiteral("wlm-2009")) return QIcon(QStringLiteral(":/icons/wlm-2009.svg"));
     if (id == QStringLiteral("aim-7") || id == QStringLiteral("aim-classic")) return QIcon(QStringLiteral(":/icons/aim-7.svg"));
