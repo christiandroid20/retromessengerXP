@@ -5,7 +5,7 @@ Este directorio contiene la aplicación de escritorio Qt 6, sin Electron ni nave
 ## Requisitos
 
 - CMake 3.24 o posterior.
-- Qt 6.5 o posterior, módulo Widgets.
+- Qt 6.5 o posterior, módulos Widgets y Svg.
 - Compilador C++20.
 
 ## Configuración local
