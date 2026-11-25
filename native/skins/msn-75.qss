@@ -8,7 +8,7 @@ QWidget {
     font-family: Tahoma, "Segoe UI", sans-serif;
     font-size: 9pt;
 }
-QMainWindow, QWidget#messengerWorkspace { background: #0054e3; }
+QMainWindow, QSplitter#messengerWorkspace { background: #0054e3; }
 QMenuBar {
     background: #ece9d8;
     color: #000;
