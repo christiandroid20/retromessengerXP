@@ -64,7 +64,8 @@ Cada cuenta tiene un UUID y sus propios directorios. El índice se escribe media
 ## Estado funcional
 
 - Shell nativo Qt Widgets.
-- Seis hojas QSS preliminares registradas.
+- MSN 7.5 e ICQ 2000b: layouts Qt separados y QSS específico.
+- AIM Classic, AIM 7, WLM 2009 y Yahoo! Messenger 9: QSS preliminares sobre la shell compartida.
 - Iconos SVG propios para Yahoo!, WLM 2009 y AIM; el icono AIM se comparte entre AIM Classic y AIM 7.
 - Avatar cuadrado reutilizable y foto de perfil persistente por perfil local.
 - Creación y separación de múltiples perfiles locales.
