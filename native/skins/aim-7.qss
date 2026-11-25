@@ -1,0 +1,37 @@
+/* AIM 7 inspired skin: charcoal title chrome, AOL blue accents and warm yellow focus. */
+QWidget {
+    background: #e5e5e5;
+    color: #242424;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+    font-size: 9pt;
+}
+QMainWindow, QMenuBar { background: #e5e5e5; }
+QMenuBar { border-bottom: 1px solid #a0a0a0; padding: 3px; }
+QMenuBar::item { padding: 4px 9px; }
+QMenuBar::item:selected { background: #ffed9b; color: #202020; }
+#brandTitle, #conversationTitle {
+    color: #ffffff; font-weight: bold; padding: 8px;
+    border: 1px solid #333333; border-radius: 2px;
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #666666,stop:1 #292929);
+}
+#contactsPanel, #conversationPanel {
+    background: #f8f8f8; border: 1px solid #888888; border-radius: 1px;
+}
+#sectionHeading { color: #174b83; font-weight: bold; padding: 5px; }
+#profileName { color: #174b83; font-weight: bold; padding-top: 3px; }
+#profileHint, #storageState { color: #6f6f6f; font-size: 8pt; }
+#contactList, #messageHistory, #messageComposer {
+    background: #ffffff; border: 1px solid #888888;
+    selection-background-color: #ffe98a; selection-color: #202020;
+}
+#emptyTitle { color: #174b83; font-size: 15pt; font-weight: bold; }
+#emptyState, #transportState { color: #666666; padding: 8px; }
+QPushButton, QComboBox {
+    color: #242424; background: #eeeeee;
+    border-top: 1px solid #ffffff; border-left: 1px solid #ffffff;
+    border-right: 1px solid #777777; border-bottom: 1px solid #777777;
+    border-radius: 1px; padding: 5px 12px;
+}
+QPushButton:hover { background: #fff2b8; }
+QPushButton:pressed { background: #f4dc76; }
+QPushButton:disabled { color: #999999; background: #e2e2e2; }
