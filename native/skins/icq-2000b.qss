@@ -1,75 +1,133 @@
-/* ICQ 2000b / Windows 98 inspired native skin. */
+/* ICQ 2000b / Windows 98.
+   Native Qt port informed by the MIT-licensed Retro Messenger theme:
+   https://github.com/Lisandro46/retroskin-msn-icq-for-wsp
+   This is a native widget stylesheet, not a direct CSS copy. */
+
 QWidget {
-    background: #c0c0c0;
-    color: #000000;
+    color: #000;
     font-family: "Microsoft Sans Serif", Tahoma, sans-serif;
-    font-size: 9pt;
+    font-size: 8pt;
 }
-QMainWindow, QMenuBar {
-    background: #c0c0c0;
-}
+QMainWindow, QWidget#messengerWorkspace { background: #c0c0c0; }
 QMenuBar {
-    border-bottom: 1px solid #808080;
+    background: #c0c0c0;
+    color: #000;
+    border: 0;
     padding: 2px;
+    spacing: 3px;
 }
 QMenuBar::item {
+    background: #c0c0c0;
     padding: 3px 8px;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
 }
 QMenuBar::item:selected {
-    background: #000080;
-    color: #ffffff;
+    background: #d4d0c8;
+    color: #000;
 }
-#brandTitle, #conversationTitle {
-    color: #ffffff;
-    font-weight: bold;
-    padding: 6px;
-    border: 1px solid #000040;
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
-        stop:0 #000080, stop:1 #1084d0);
-}
-#contactsPanel, #conversationPanel {
+QMenu {
     background: #c0c0c0;
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
+    color: #000;
+    border: 1px solid #404040;
+    padding: 3px;
+}
+QMenu::item { padding: 4px 24px; }
+QMenu::item:selected { color: #fff; background: #000080; }
+
+QLabel#applicationIdentity {
+    color: #000080;
+    font-weight: bold;
+    padding: 3px 6px;
+}
+QComboBox#skinSelector, QComboBox#accountSelector {
+    color: #000;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 2px 4px;
+}
+QFrame#icqContactWindow, QFrame#icqMessageSession {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
     border-right: 2px solid #404040;
     border-bottom: 2px solid #404040;
 }
-#sectionHeading {
-    font-weight: bold;
-    padding: 5px;
+QFrame#icqIdentityPanel {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
 }
-#contactList, #messageHistory, #messageComposer {
-    background: #ffffff;
+QLabel#icqUin { color: #404040; font-size: 8pt; }
+QLabel#icqContactHeading {
+    color: #000080;
+    font-weight: bold;
+    padding: 4px 3px;
+}
+QListWidget#icqContactList {
+    color: #000;
+    background: #fff;
     border-top: 2px solid #404040;
     border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
     selection-background-color: #000080;
-    selection-color: #ffffff;
+    selection-color: #fff;
+    outline: none;
 }
-#emptyTitle {
-    color: #000080;
-    font-size: 13pt;
+QLabel#icqEmptyState {
+    color: #404040;
+    padding: 5px;
+    background: #c0c0c0;
+}
+QPushButton#icqToolbarButton, QPushButton#icqQuickButton, QPushButton#icqSendButton {
+    color: #000;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 3px 7px;
+}
+QPushButton#icqToolbarButton:pressed, QPushButton#icqQuickButton:pressed,
+QPushButton#icqSendButton:pressed {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+QPushButton:disabled { color: #808080; }
+QLabel#icqStatusLine { color: #000080; padding: 4px 3px; }
+QLabel#icqSessionTitle {
+    color: #fff;
     font-weight: bold;
+    padding: 4px 6px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #000080, stop:1 #1084d0);
+    border: 1px solid #404040;
 }
-#emptyState, #transportState {
+QFrame#icqMessageHistory {
+    background: #fff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+QLabel#icqHistoryEmpty, QLabel#icqTransportState {
     color: #404040;
     padding: 7px;
 }
-QPushButton, QComboBox {
-    background: #c0c0c0;
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-    padding: 4px 10px;
-}
-QPushButton:pressed {
+QPlainTextEdit#icqMessageComposer {
+    color: #000;
+    background: #fff;
     border-top: 2px solid #404040;
     border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
 }
-QPushButton:disabled {
-    color: #808080;
-}
+QPlainTextEdit#icqMessageComposer:disabled { color: #808080; }
+QLabel#storageState { color: #404040; font-size: 8pt; }
