@@ -47,7 +47,7 @@ Implementación propia actual: `native/skins/aim-classic.qss`. Reutiliza el icon
 ## Criterio de licencia
 
 - Todos los QSS fueron escritos para este proyecto.
-- Los tres SVG de esta carpeta son ilustraciones originales creadas para el selector de skins.
+- Los cinco SVG de esta carpeta son ilustraciones originales creadas para el selector de skins: MSN 7.5, ICQ 2000b, Yahoo! Messenger 9, WLM 2009 y AIM (compartido entre AIM Classic y AIM 7). Los dibujos de MSN e ICQ se portaron desde el catálogo de iconos dibujados a mano de `docs/legacy-reference/icons.ts`; son aproximaciones vectoriales propias, no archivos extraídos ni logotipos oficiales.
 - No se redistribuyen ejecutables antiguos, DLL, archivos extraídos de instaladores, emoticonos, sonidos ni logotipos oficiales.
 - Las marcas y nombres se usan únicamente para identificar el estilo de referencia; no se afirma afiliación con Yahoo, Microsoft, AOL ni sus titulares.
 - Si en el futuro se incorporan recursos históricos exactos, primero debe verificarse la licencia o autorización de redistribución de cada archivo y registrar su procedencia.
