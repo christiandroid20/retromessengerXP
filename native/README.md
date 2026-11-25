@@ -30,7 +30,7 @@ El selector registra seis estilos:
 - MSN Messenger 7.5
 - ICQ 2000b
 
-Los QSS existentes son adaptaciones preliminares. Actualmente se aplican sobre una estructura genérica compartida; no son reproducciones 1:1. La reconstrucción fiel requiere ventanas, composición, controles, métricas, recursos y estados particulares para cada cliente. Los objetivos de versión, referencias y criterios de aceptación se documentan en [SKIN_1TO1_IMPLEMENTATION_PLAN.md](../docs/SKIN_1TO1_IMPLEMENTATION_PLAN.md).
+MSN Messenger 7.5 e ICQ 2000b ya construyen composiciones Qt diferentes: perfil/lista de contactos y ventana de conversación, con menús y controles propios de cada tema. Sus hojas QSS también tienen reglas específicas para esas estructuras. La implementación se portó tomando como referencia el proyecto MIT [Retro Messenger para WhatsApp](https://github.com/Lisandro46/retroskin-msn-icq-for-wsp); no se copió su capa de WhatsApp Web ni se incorporó Electron. Los otros cuatro temas siguen usando la shell genérica. Ninguno está validado como 1:1: faltan capturas comparativas, marcos de ventana propios, recursos históricos autorizados, diálogos y revisión en ejecución. Ver [RETROMESSENGER_THEME_PORT.md](../docs/RETROMESSENGER_THEME_PORT.md) y [SKIN_1TO1_IMPLEMENTATION_PLAN.md](../docs/SKIN_1TO1_IMPLEMENTATION_PLAN.md).
 
 ## Fotos de usuario
 
