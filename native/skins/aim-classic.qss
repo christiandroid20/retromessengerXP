@@ -1,0 +1,96 @@
+/* AIM Classic / early AOL Instant Messenger Buddy List, late-1990s to early-2000s inspired skin. */
+QWidget {
+    background: #d4d0c8;
+    color: #111111;
+    font-family: Tahoma, "Microsoft Sans Serif", sans-serif;
+    font-size: 8pt;
+}
+QMainWindow, QMenuBar {
+    background: #d4d0c8;
+}
+QMenuBar {
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #808080;
+    padding: 2px;
+}
+QMenuBar::item {
+    padding: 3px 7px;
+    background: transparent;
+}
+QMenuBar::item:selected {
+    background: #000080;
+    color: #ffffff;
+}
+#brandTitle, #conversationTitle {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px 7px;
+    border: 1px solid #00004a;
+    border-radius: 0;
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 #3977bd, stop:0.48 #15549b, stop:1 #07336f);
+}
+#contactsPanel, #conversationPanel {
+    background: #d4d0c8;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #666666;
+    border-bottom: 2px solid #666666;
+    border-radius: 0;
+}
+#sectionHeading {
+    color: #ffffff;
+    background: #174b86;
+    font-weight: bold;
+    padding: 4px 6px;
+}
+#profileName {
+    color: #102f58;
+    font-weight: bold;
+    padding-top: 2px;
+}
+#profileHint, #storageState {
+    color: #555555;
+    font-size: 7pt;
+}
+#contactList, #messageHistory, #messageComposer {
+    background: #ffffff;
+    color: #111111;
+    border-top: 2px solid #666666;
+    border-left: 2px solid #666666;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    selection-background-color: #ffe66b;
+    selection-color: #111111;
+}
+#emptyTitle {
+    color: #174b86;
+    font-size: 12pt;
+    font-weight: bold;
+}
+#emptyState, #transportState {
+    color: #555555;
+    padding: 6px;
+}
+QPushButton, QComboBox {
+    color: #111111;
+    background: #d4d0c8;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #666666;
+    border-bottom: 2px solid #666666;
+    border-radius: 0;
+    padding: 3px 9px;
+}
+QPushButton:hover, QComboBox:hover {
+    background: #e8e5dd;
+}
+QPushButton:pressed {
+    border-top: 2px solid #666666;
+    border-left: 2px solid #666666;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+QPushButton:disabled {
+    color: #888888;
+}
