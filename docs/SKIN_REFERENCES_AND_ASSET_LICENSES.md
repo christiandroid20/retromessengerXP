@@ -36,9 +36,17 @@ Referencia de diseño: AIM 7 como generación posterior del cliente clásico, co
 
 Implementación propia actual: `native/skins/aim-7.qss` y `native/resources/icons/aim-7.svg`. El icono de corredor es una reinterpretación geométrica propia, no un recurso oficial de AOL.
 
+### AIM Classic / Buddy List original
+
+Referencia de diseño: cliente AIM clásico de finales de los noventa y primeros años de los 2000. La adaptación prioriza la lista compacta, la cabecera azul, el marco gris biselado, el área blanca de buddies y el resaltado amarillo de selección. Se conserva como opción separada de AIM 7.
+
+- Curio, referencia histórica de la Buddy List clásica: https://designbycurio.com/aol-instant-messenger-1997
+
+Implementación propia actual: `native/skins/aim-classic.qss`. Reutiliza el icono SVG geométrico original de AIM ya creado para el selector; no incorpora el logotipo oficial ni recursos extraídos del cliente.
+
 ## Criterio de licencia
 
-- Los tres QSS fueron escritos para este proyecto.
+- Todos los QSS fueron escritos para este proyecto.
 - Los tres SVG de esta carpeta son ilustraciones originales creadas para el selector de skins.
 - No se redistribuyen ejecutables antiguos, DLL, archivos extraídos de instaladores, emoticonos, sonidos ni logotipos oficiales.
 - Las marcas y nombres se usan únicamente para identificar el estilo de referencia; no se afirma afiliación con Yahoo, Microsoft, AOL ni sus titulares.
