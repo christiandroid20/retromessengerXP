@@ -22,7 +22,8 @@ WhatsApp será únicamente un servicio de conexión detrás de la interfaz propi
 | Área | Estado |
 |---|---|
 | Shell de escritorio Qt | Base inicial |
-| Seis skins | QSS preliminares; fidelidad 1:1 pendiente |
+| MSN 7.5 e ICQ 2000b | Composición Qt y QSS específicos; validación 1:1 pendiente |
+| AIM Classic, AIM 7, WLM 2009 y Yahoo! Messenger 9 | QSS preliminares sobre shell genérica |
 | Avatar cuadrado estilo MSN 7.5 | Componente nativo reutilizable |
 | Foto de perfil por cuenta | Selección y guardado local en PNG |
 | Perfiles múltiples | Creación y separación local por UUID |
