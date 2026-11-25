@@ -7,7 +7,7 @@ Rama destino: `work/msn-whatsapp-xp`
 
 Proyecto consultado: [Lisandro46/retroskin-msn-icq-for-wsp](https://github.com/Lisandro46/retroskin-msn-icq-for-wsp).
 
-El repositorio fuente declara licencia MIT y atribuye el proyecto a Lisandro Arrigoni. La portabilidad de esta rama toma como referencia, entre otros:
+El repositorio fuente declara licencia MIT y atribuye el proyecto a Lisandro Arrigoni. También conserva capturas de su propia implementación en `docs/capturas/etapa1-msn.png` y `docs/capturas/etapa1-icq.png`; son referencias del fork, no capturas oficiales de los clientes históricos. La portabilidad de esta rama toma como referencia, entre otros:
 
 - `src/renderer/skins.ts`: jerarquía de ventanas, títulos y menús para MSN 7.5 e ICQ 2000b.
 - `src/renderer/styles/msn.css`: barra Luna, botones, menús, áreas de contenido y diálogos MSN.
