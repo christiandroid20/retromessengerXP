@@ -51,10 +51,10 @@ Cada cuenta tiene un UUID y sus propios directorios. El índice se escribe media
 ## Estado
 
 - Shell nativo Qt Widgets.
-- Skin QSS preliminar MSN 7.5 e ICQ 2000b.
+- Skin QSS preliminar MSN 7.5, ICQ 2000b, Yahoo! Messenger 9, Windows Live Messenger 2009 y AIM 7.\n- Iconos SVG originales para los selectores de Yahoo!, WLM 2009 y AIM 7.
 - Avatar cuadrado reutilizable y foto de perfil persistente por perfil local.
 - Creación y separación de múltiples perfiles locales.
 - Directorio de datos junto a la instalación cuando es escribible; fallback privado por usuario.
 - Contactos reales, historial, envío, adjuntos y transporte: pendientes.
 - Persistencia de sesiones autenticadas de WhatsApp: pendiente de un conector y de un diseño seguro de credenciales.
-- WLM 2009, Yahoo! Messenger y AIM: objetivos de diseño, no skins funcionales.
+- Los skins Yahoo!, WLM 2009 y AIM ya están registrados en el selector; son primeras adaptaciones visuales, no reproducciones 1:1.
