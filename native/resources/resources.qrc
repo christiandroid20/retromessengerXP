@@ -2,5 +2,13 @@
   <qresource prefix="/skins">
     <file alias="msn-75.qss">../skins/msn-75.qss</file>
     <file alias="icq-2000b.qss">../skins/icq-2000b.qss</file>
+    <file alias="yahoo-messenger-9.qss">../skins/yahoo-messenger-9.qss</file>
+    <file alias="wlm-2009.qss">../skins/wlm-2009.qss</file>
+    <file alias="aim-7.qss">../skins/aim-7.qss</file>
+  </qresource>
+  <qresource prefix="/icons">
+    <file alias="yahoo-messenger.svg">icons/yahoo-messenger.svg</file>
+    <file alias="wlm-2009.svg">icons/wlm-2009.svg</file>
+    <file alias="aim-7.svg">icons/aim-7.svg</file>
   </qresource>
 </RCC>
