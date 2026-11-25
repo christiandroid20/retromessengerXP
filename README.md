@@ -13,7 +13,7 @@ Se conservan seis identidades independientes, todas con objetivo de reconstrucci
 5. MSN Messenger 7.5
 6. ICQ 2000b
 
-**Estado honesto:** los seis temas actuales siguen siendo adaptaciones QSS preliminares. El cliente Qt todavía usa una estructura genérica compartida y no reproduce las ventanas y controles originales de cada mensajero. Ninguno debe anunciarse como 1:1 hasta superar la comparación visual contra capturas de la versión/build objetivo. El alcance y los criterios están en [plan de fidelidad 1:1](docs/SKIN_1TO1_IMPLEMENTATION_PLAN.md).
+**Estado honesto (última actualización):** MSN 7.5 e ICQ 2000b ya tienen composiciones nativas Qt diferenciadas para lista de contactos y conversación, junto con QSS específico, tomando como referencia la implementación del fork Retro Messenger para WhatsApp (MIT). No son ya solo recoloreos de la misma ventana genérica. Sin embargo, siguen siendo una primera portabilidad estructural: no se han validado contra capturas históricas ni reproducido todos los marcos, recursos, diálogos y estados. Los otros cuatro temas continúan en la shell genérica con QSS preliminar. Ninguno se declara 1:1. Detalle y procedencia: [portabilidad de MSN/ICQ](docs/RETROMESSENGER_THEME_PORT.md) y [plan de fidelidad 1:1](docs/SKIN_1TO1_IMPLEMENTATION_PLAN.md).
 
 WhatsApp será únicamente un servicio de conexión detrás de la interfaz propia; no habrá un séptimo skin de WhatsApp ni se copiará su interfaz.
 
