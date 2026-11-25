@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QSplitter>
 #include <QStatusBar>
+#include <QTimer>
 #include <QUrl>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -437,23 +438,27 @@ void MainWindow::buildMenus()
             choice->setCheckable(true);
             choice->setChecked(skin.id == m_currentSkinId);
             connect(choice, &QAction::triggered, this, [this, id = skin.id] {
-                const int index = m_skinSelector->findData(id);
-                if (index >= 0)
-                    m_skinSelector->setCurrentIndex(index);
+                QTimer::singleShot(0, this, [this, id] {
+                    const int index = m_skinSelector->findData(id);
+                    if (index >= 0)
+                        m_skinSelector->setCurrentIndex(index);
+                });
             });
         }
     };
     auto addAppearanceAction = [this](QMenu *menu) {
         auto *reload = menu->addAction(QStringLiteral("Actualizar temas externos"));
         connect(reload, &QAction::triggered, this, [this] {
-            const QString current = m_skinSelector->currentData().toString();
-            m_skinManager->reload();
-            m_skinSelector->clear();
-            for (const auto &skin : m_skinManager->availableSkins())
-                m_skinSelector->addItem(iconForSkin(skin.id), skin.displayName, skin.id);
-            const int index = m_skinSelector->findData(current);
-            m_skinSelector->setCurrentIndex(index >= 0 ? index : 0);
-            applySelectedSkin(m_skinSelector->currentIndex());
+            QTimer::singleShot(0, this, [this] {
+                const QString current = m_skinSelector->currentData().toString();
+                m_skinManager->reload();
+                m_skinSelector->clear();
+                for (const auto &skin : m_skinManager->availableSkins())
+                    m_skinSelector->addItem(iconForSkin(skin.id), skin.displayName, skin.id);
+                const int index = m_skinSelector->findData(current);
+                m_skinSelector->setCurrentIndex(index >= 0 ? index : 0);
+                applySelectedSkin(m_skinSelector->currentIndex());
+            });
         });
     };
 
