@@ -271,9 +271,7 @@ void MainWindow::applySelectedSkin(int index)
     if (!m_skinManager->apply(skinId, qApp))
         return;
 
-    const QIcon skinIcon = iconForSkin(skinId);
-    if (!skinIcon.isNull())
-        setWindowIcon(skinIcon);
+    setWindowIcon(iconForSkin(skinId));
 
     QSettings settings;
     settings.setValue(QStringLiteral("appearance/skin"), skinId);
