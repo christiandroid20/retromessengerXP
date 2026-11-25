@@ -35,7 +35,7 @@ QIcon iconForSkin(const QString &id)
 {
     if (id == QStringLiteral("yahoo-messenger-9")) return QIcon(QStringLiteral(":/icons/yahoo-messenger.svg"));
     if (id == QStringLiteral("wlm-2009")) return QIcon(QStringLiteral(":/icons/wlm-2009.svg"));
-    if (id == QStringLiteral("aim-7")) return QIcon(QStringLiteral(":/icons/aim-7.svg"));
+    if (id == QStringLiteral("aim-7") || id == QStringLiteral("aim-classic")) return QIcon(QStringLiteral(":/icons/aim-7.svg"));
     return {};
 }
 }
