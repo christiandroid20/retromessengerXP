@@ -46,4 +46,5 @@ private:
     QWidget *m_workspace = nullptr;
     QVBoxLayout *m_outerLayout = nullptr;
     QString m_currentSkinId = QStringLiteral("msn-75");
+    QString m_selectedAccountId;
 };
