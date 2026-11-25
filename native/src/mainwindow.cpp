@@ -565,7 +565,7 @@ void MainWindow::refreshAccounts()
     if (!m_accountSelector)
         return;
 
-    const QString currentId = m_accountSelector->currentData().toString();
+    const QString currentId = m_selectedAccountId;
     const QVector<StoredAccount> accounts = m_storage.accounts();
     m_accountSelector->blockSignals(true);
     m_accountSelector->clear();
@@ -585,6 +585,7 @@ void MainWindow::selectAccount(int index)
         return;
 
     if (index < 0 || index >= m_accountSelector->count()) {
+        m_selectedAccountId.clear();
         m_profileAvatar->setPhoto(QString());
         m_profileAvatar->setInitials(m_currentSkinId == QStringLiteral("icq-2000b")
                                          ? QStringLiteral("IC") : QStringLiteral("ME"));
@@ -592,6 +593,7 @@ void MainWindow::selectAccount(int index)
     }
 
     const QString accountId = m_accountSelector->itemData(index).toString();
+    m_selectedAccountId = accountId;
     for (const StoredAccount &account : m_storage.accounts()) {
         if (account.id != accountId)
             continue;
