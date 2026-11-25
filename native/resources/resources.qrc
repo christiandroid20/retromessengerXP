@@ -8,6 +8,8 @@
     <file alias="aim-classic.qss">../skins/aim-classic.qss</file>
   </qresource>
   <qresource prefix="/icons">
+    <file alias="msn-75.svg">icons/msn-75.svg</file>
+    <file alias="icq-2000b.svg">icons/icq-2000b.svg</file>
     <file alias="yahoo-messenger.svg">icons/yahoo-messenger.svg</file>
     <file alias="wlm-2009.svg">icons/wlm-2009.svg</file>
     <file alias="aim-7.svg">icons/aim-7.svg</file>
