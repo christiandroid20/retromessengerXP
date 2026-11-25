@@ -1,74 +1,125 @@
-/* MSN Messenger 7.5 / Windows XP Luna inspired native skin. */
+/* MSN Messenger 7.5 / Windows XP Luna.
+   Native Qt port informed by the MIT-licensed Retro Messenger theme:
+   https://github.com/Lisandro46/retroskin-msn-icq-for-wsp
+   This is a native widget stylesheet, not a direct CSS copy. */
+
 QWidget {
-    background: #dbe8f8;
     color: #172b4d;
     font-family: Tahoma, "Segoe UI", sans-serif;
     font-size: 9pt;
 }
-QMainWindow, QMenuBar {
-    background: #dbe8f8;
-}
+QMainWindow, QWidget#messengerWorkspace { background: #0054e3; }
 QMenuBar {
-    border-bottom: 1px solid #9ab3dc;
+    background: #ece9d8;
+    color: #000;
+    border-bottom: 1px solid #aca899;
+    padding: 2px 3px;
+    spacing: 1px;
+}
+QMenuBar::item { padding: 3px 8px; background: transparent; }
+QMenuBar::item:selected { color: #fff; background: #316ac5; }
+QMenu {
+    background: #fff;
+    color: #000;
+    border: 1px solid #aca899;
     padding: 3px;
 }
-QMenuBar::item {
-    padding: 4px 9px;
-    background: transparent;
-}
-QMenuBar::item:selected, QPushButton:hover {
-    background: #c4daf7;
-    border: 1px solid #7fa1d8;
-}
-#brandTitle, #conversationTitle {
-    color: #ffffff;
+QMenu::item { padding: 4px 26px 4px 22px; }
+QMenu::item:selected { color: #fff; background: #316ac5; }
+
+QLabel#applicationIdentity {
+    color: #fff;
     font-weight: bold;
-    padding: 8px;
-    border: 1px solid #2b69c7;
-    border-radius: 5px;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-        stop:0 #48a5ff, stop:0.48 #0876e8, stop:1 #0645b5);
+    padding: 3px 7px;
+    background: #0759d7;
+    border: 1px solid #1648a0;
 }
-#contactsPanel, #conversationPanel {
-    background: #f8fbff;
-    border: 1px solid #8da9de;
+QComboBox#skinSelector {
+    color: #172b4d;
+    background: #fff;
+    border: 1px solid #7f9db9;
+    padding: 3px 6px;
+}
+QFrame#msnContactWindow, QFrame#msnConversationWindow {
+    background: #fff;
+    border: 1px solid #6d8fd2;
     border-radius: 4px;
 }
-#sectionHeading {
+QFrame#msnProfilePanel {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #f8fbff, stop:1 #d6e5f8);
+    border: 1px solid #a6bad8;
+    border-radius: 3px;
+}
+QLabel#msnDisplayName { color: #173e78; font-weight: bold; }
+QComboBox#accountSelector {
+    background: #fff;
+    color: #000;
+    border: 1px solid #7f9db9;
+    padding: 2px 4px;
+}
+QLabel#msnPresence { color: #267329; font-size: 8pt; font-weight: bold; }
+QLabel#msnPersonalMessage { color: #647894; font-size: 8pt; }
+QLabel#msnContactHeading {
     color: #174a91;
     font-weight: bold;
-    padding: 5px;
+    padding: 4px 2px 2px;
+    border-bottom: 1px solid #c7d6eb;
 }
-#profileName {
-    color: #173e78;
+QLabel#msnGroupHeading {
+    color: #345b8d;
     font-weight: bold;
-    padding-top: 3px;
-}
-#profileHint, #storageState {
-    color: #71829c;
     font-size: 8pt;
+    padding: 3px 2px;
+    background: #edf3fb;
 }
-#contactList, #messageHistory, #messageComposer {
-    background: #ffffff;
-    border: 1px solid #9ab3dc;
+QListWidget#msnContactList {
+    background: #fff;
+    color: #000;
+    border: 1px solid #d4deed;
     selection-background-color: #c9dcf6;
+    selection-color: #000;
+    outline: none;
 }
-#emptyTitle {
-    color: #1d4f9e;
-    font-size: 15pt;
-    font-weight: bold;
+QLabel#msnEmptyState {
+    color: #71829c;
+    padding: 7px;
+    background: #fff;
 }
-#emptyState, #transportState {
-    color: #637795;
-    padding: 8px;
-}
-QPushButton, QComboBox {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffffff, stop:1 #dce8fa);
-    border: 1px solid #7fa1d8;
+QPushButton#msnAddContact, QPushButton#msnToolButton, QPushButton#msnSendButton {
+    color: #183d70;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #fff, stop:0.5 #f2f6fc, stop:1 #d4e2f6);
+    border: 1px solid #8aa9d6;
     border-radius: 3px;
-    padding: 5px 12px;
+    padding: 3px 8px;
 }
-QPushButton:disabled {
+QPushButton#msnAddContact:disabled, QPushButton#msnToolButton:disabled,
+QPushButton#msnSendButton:disabled {
     color: #8996a8;
     background: #e8edf5;
 }
+QFrame#msnConversationHeader {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #f4f8fe, stop:1 #d8e6f8);
+    border: 1px solid #a6bad8;
+    border-radius: 3px;
+}
+QLabel#msnConversationTitle { color: #174a91; font-weight: bold; }
+QLabel#msnConversationPresence { color: #367c35; font-size: 8pt; }
+QFrame#msnMessageHistory {
+    background: #fff;
+    border: 1px solid #a6bad8;
+}
+QLabel#msnHistoryEmpty { color: #71829c; padding: 12px; }
+QPlainTextEdit#msnMessageComposer {
+    background: #fff;
+    color: #000;
+    border: 1px solid #7f9db9;
+    selection-background-color: #316ac5;
+}
+QPlainTextEdit#msnMessageComposer:disabled {
+    color: #8996a8;
+    background: #f5f7fa;
+}
+QLabel#storageState { color: #eaf2ff; font-size: 8pt; }
