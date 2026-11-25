@@ -101,7 +101,7 @@ QPushButton#icqSendButton:pressed {
     border-bottom: 2px solid #fff;
 }
 QPushButton:disabled { color: #808080; }
-QLabel#icqStatusLine { color: #000080; padding: 4px 3px; }
+QLabel#icqStatusLine { color: #404040; padding: 4px 3px; }
 QLabel#icqSessionTitle {
     color: #fff;
     font-weight: bold;
