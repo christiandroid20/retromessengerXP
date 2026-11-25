@@ -1,0 +1,36 @@
+/* Windows Live Messenger 2009 / Wave 3 inspired skin: glass-blue chrome and scene-like header. */
+QWidget {
+    background: #dceaf4;
+    color: #18364c;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 9pt;
+}
+QMainWindow, QMenuBar { background: #dceaf4; }
+QMenuBar { background: #edf5fa; border-bottom: 1px solid #a8c6d9; padding: 3px; }
+QMenuBar::item { padding: 4px 9px; }
+QMenuBar::item:selected { background: #d1e8f7; }
+#brandTitle, #conversationTitle {
+    color: #ffffff; font-weight: bold; padding: 9px;
+    border: 1px solid #4c8db4; border-radius: 5px;
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 #b9e2f5,stop:0.18 #68b6df,stop:0.55 #2386bf,stop:1 #155b91);
+}
+#contactsPanel, #conversationPanel {
+    background: #f5fbff; border: 1px solid #9bbfd5; border-radius: 4px;
+}
+#sectionHeading { color: #155b8d; font-weight: bold; padding: 5px; }
+#profileName { color: #164f79; font-weight: bold; padding-top: 3px; }
+#profileHint, #storageState { color: #68879b; font-size: 8pt; }
+#contactList, #messageHistory, #messageComposer {
+    background: #ffffff; border: 1px solid #a8c6d9;
+    selection-background-color: #d7edf9; selection-color: #174b6b;
+}
+#emptyTitle { color: #17628f; font-size: 15pt; font-weight: bold; }
+#emptyState, #transportState { color: #668397; padding: 8px; }
+QPushButton, QComboBox {
+    color: #17415c;
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #ffffff,stop:1 #d9edf8);
+    border: 1px solid #8eb7d0; border-radius: 4px; padding: 5px 12px;
+}
+QPushButton:hover { background: #eefaff; border-color: #4c9ac7; }
+QPushButton:disabled { color: #8fa6b4; background: #e7f0f5; }
