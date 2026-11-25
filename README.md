@@ -8,7 +8,7 @@
 |---|---|
 | Shell de escritorio Qt | Base inicial |
 | Skin MSN Messenger 7.5 | Adaptación QSS preliminar |
-| Skin ICQ 2000b | Adaptación QSS preliminar |\n| Skin Yahoo! Messenger 9 | QSS propio + icono SVG original |\n| Skin Windows Live Messenger 2009 | QSS propio + icono SVG original |\n| Skin AIM 7 | QSS propio + icono SVG original |
+| Skin ICQ 2000b | Adaptación QSS preliminar |\n| Skin Yahoo! Messenger 9 | QSS propio + icono SVG original |\n| Skin Windows Live Messenger 2009 | QSS propio + icono SVG original |\n| Skin AIM Classic | QSS propio estilo Buddy List clásica |\n| Skin AIM 7 | QSS propio + icono SVG original |
 | Avatar cuadrado estilo MSN 7.5 | Componente nativo reutilizable |
 | Foto de perfil por cuenta | Selección y guardado local en PNG |
 | Perfiles múltiples | Creación y separación local por UUID |
@@ -20,7 +20,7 @@
 
 La aplicación todavía **no inicia sesión en WhatsApp**. Los perfiles locales no son sesiones autenticadas y la carpeta `session/` es una estructura preparada para el futuro conector; no contiene cookies ni tokens.
 
-## Skins disponibles\n\nEl selector nativo incluye MSN Messenger 7.5, ICQ 2000b, Yahoo! Messenger 9, Windows Live Messenger 2009 y AIM 7. Los tres skins nuevos incluyen hojas QSS propias e iconos SVG originales. Son interpretaciones visuales iniciales, no clones 1:1 ni paquetes de recursos oficiales.\n\n- Yahoo! Messenger 9: paleta violeta, paneles claros y acentos púrpura.\n- Windows Live Messenger 2009: azul cristal inspirado en Wave 3, con lenguaje visual de escenas.\n- AIM 7: cromado gris oscuro, acentos AOL azul y selección amarilla.\n\nLos recursos originales y las fuentes históricas se documentan en [referencias y licencias](docs/SKIN_REFERENCES_AND_ASSET_LICENSES.md). No se importaron DLL, ejecutables, sonidos ni assets extraídos de clientes propietarios.\n\n## Fotos de usuario
+## Skins disponibles\n\nEl selector nativo incluye MSN Messenger 7.5, ICQ 2000b, Yahoo! Messenger 9, Windows Live Messenger 2009, AIM Classic y AIM 7. Los tres skins nuevos incluyen hojas QSS propias e iconos SVG originales. Son interpretaciones visuales iniciales, no clones 1:1 ni paquetes de recursos oficiales.\n\n- Yahoo! Messenger 9: paleta violeta, paneles claros y acentos púrpura.\n- Windows Live Messenger 2009: azul cristal inspirado en Wave 3, con lenguaje visual de escenas.\n- AIM Classic: ventana compacta gris/beige, cabecera azul, controles biselados y selección amarilla estilo Buddy List.\n- AIM 7: cromado gris oscuro, acentos AOL azul y selección amarilla.\n\nLos recursos originales y las fuentes históricas se documentan en [referencias y licencias](docs/SKIN_REFERENCES_AND_ASSET_LICENSES.md). No se importaron DLL, ejecutables, sonidos ni assets extraídos de clientes propietarios.\n\n## Fotos de usuario
 
 El avatar utiliza un formato cuadrado con marco azul, recorte de imagen y un marcador de iniciales cuando todavía no hay foto. En «Archivo → Cambiar foto de perfil…» se elige la imagen del perfil seleccionado. Cada cuenta conserva su propia foto en:
 
