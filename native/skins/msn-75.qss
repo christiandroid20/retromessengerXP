@@ -58,7 +58,7 @@ QComboBox#accountSelector {
     border: 1px solid #7f9db9;
     padding: 2px 4px;
 }
-QLabel#msnPresence { color: #267329; font-size: 8pt; font-weight: bold; }
+QLabel#msnPresence { color: #6b6b6b; font-size: 8pt; font-weight: bold; }
 QLabel#msnPersonalMessage { color: #647894; font-size: 8pt; }
 QLabel#msnContactHeading {
     color: #174a91;
