@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets Svg)
 
 qt_standard_project_setup()
 
@@ -22,7 +22,7 @@ qt_add_executable(msn-whatsapp-xp
     native/resources/resources.qrc
 )
 
-target_link_libraries(msn-whatsapp-xp PRIVATE Qt6::Widgets)
+target_link_libraries(msn-whatsapp-xp PRIVATE Qt6::Widgets Qt6::Svg)
 
 target_compile_definitions(msn-whatsapp-xp PRIVATE
     MSN_WA_XP_VERSION="${PROJECT_VERSION}"
