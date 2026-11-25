@@ -1,0 +1,35 @@
+/* Yahoo! Messenger 9 inspired skin: purple chrome, bright white panes, compact buddy list. */
+QWidget {
+    background: #e8e1f0;
+    color: #30283b;
+    font-family: Tahoma, "Segoe UI", sans-serif;
+    font-size: 9pt;
+}
+QMainWindow, QMenuBar { background: #e8e1f0; }
+QMenuBar { border-bottom: 1px solid #b9a9ce; padding: 3px; }
+QMenuBar::item { padding: 4px 9px; }
+QMenuBar::item:selected { background: #d8c8e9; }
+#brandTitle, #conversationTitle {
+    color: #ffffff; font-weight: bold; padding: 8px;
+    border: 1px solid #56327c; border-radius: 4px;
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #9a70c4,stop:0.52 #7545a5,stop:1 #57317f);
+}
+#contactsPanel, #conversationPanel {
+    background: #fbfaff; border: 1px solid #b9a6ce; border-radius: 3px;
+}
+#sectionHeading { color: #5b337e; font-weight: bold; padding: 5px; }
+#profileName { color: #4d2c6e; font-weight: bold; padding-top: 3px; }
+#profileHint, #storageState { color: #81758f; font-size: 8pt; }
+#contactList, #messageHistory, #messageComposer {
+    background: #ffffff; border: 1px solid #c6b9d4;
+    selection-background-color: #e4d6f2; selection-color: #342046;
+}
+#emptyTitle { color: #70469a; font-size: 15pt; font-weight: bold; }
+#emptyState, #transportState { color: #796d87; padding: 8px; }
+QPushButton, QComboBox {
+    color: #39264b;
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 #ffffff,stop:1 #e9e0f1);
+    border: 1px solid #a891bd; border-radius: 3px; padding: 5px 12px;
+}
+QPushButton:hover { background: #f4eafa; border-color: #8058a4; }
+QPushButton:disabled { color: #a69bad; background: #eeeaf2; }
