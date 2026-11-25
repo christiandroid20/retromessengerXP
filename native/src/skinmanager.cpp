@@ -24,6 +24,8 @@ void SkinManager::reload()
          QStringLiteral(":/skins/yahoo-messenger-9.qss"), {}},
         {QStringLiteral("wlm-2009"), QStringLiteral("Windows Live Messenger 2009"),
          QStringLiteral(":/skins/wlm-2009.qss"), {}},
+        {QStringLiteral("aim-classic"), QStringLiteral("AIM Classic · Buddy List"),
+         QStringLiteral(":/skins/aim-classic.qss"), {}},
         {QStringLiteral("aim-7"), QStringLiteral("AIM 7"),
          QStringLiteral(":/skins/aim-7.qss"), {}}
     };
